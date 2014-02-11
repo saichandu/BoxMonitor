@@ -10,4 +10,6 @@ public interface ApplicationConstants {
 	String CURRENT_BOX_BOOKING = "currentBoxBooking";
 	String WHATS_NEW_FEATURE = "WHATS_NEW_FEATURE";
 	String ADMIN_EMAIL = "saavvaru@deloitte.com";
+	String HOST_NAME = "ussltcsnw2614.solutions.glbsnet.com";
+	String PORT = "9085";
 }

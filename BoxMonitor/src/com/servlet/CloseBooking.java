@@ -69,7 +69,8 @@ public class CloseBooking extends HttpServlet {
 									.getMessage(
 											boxName,
 											booking.getEmail(),
-											request.getServerName(),
+											ApplicationConstants.HOST_NAME,
+											//request.getServerName(),
 											"" + request.getServerPort() + "",
 											request.getContextPath().substring(1,
 													request.getContextPath().length()),

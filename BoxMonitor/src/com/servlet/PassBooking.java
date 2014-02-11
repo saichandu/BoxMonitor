@@ -73,7 +73,8 @@ public class PassBooking extends HttpServlet {
 									.getMessage(
 											boxName,
 											currentUserBooking.getEmail(),
-											request.getServerName(),
+											ApplicationConstants.HOST_NAME,
+											//request.getServerName(),
 											"" + request.getServerPort() + "",
 											request.getContextPath().substring(1,
 													request.getContextPath().length()),

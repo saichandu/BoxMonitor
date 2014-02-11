@@ -6,6 +6,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import com.constants.ApplicationConstants;
 import com.exception.ApplicationException;
 import com.mongo.MongoDBConnManager;
 import com.scheduler.TimeKeeper;
@@ -32,7 +33,7 @@ public class ApplicationContextListener implements ServletContextListener {
 			*/
 			
 			//Start the timekeeper
-			TimeKeeper tkTask = new TimeKeeper("localhost", "9085", servletContext.getContextPath());
+			TimeKeeper tkTask = new TimeKeeper(ApplicationConstants.HOST_NAME, ApplicationConstants.PORT, servletContext.getContextPath());
 			timer.scheduleAtFixedRate(tkTask, 0, 5*60*1000);
 			
 			// save the timer in context
