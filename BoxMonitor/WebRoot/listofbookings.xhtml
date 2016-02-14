@@ -1,0 +1,82 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition template="./index.xhtml">
+		<ui:define name="content">
+			<h:form id="bookingLstForm">
+				<p:panel id="bookingLstPanel" header="Bookings Sheet">
+					<p:messages autoUpdate="true" escape="false"/>
+					<f:verbatim><br/></f:verbatim>
+					<p:dataTable id="bookingTblId" var="booking" value="#{boxbookingmb.bookings}"
+						rows="10" paginator="#{boxbookingmb.bookings.size() > 10}" reflow="true" rowsPerPageTemplate="10,15,20"
+                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                        selection="#{boxbookingmb.selectedRow}" rowKey="#{booking.boxName.hashCode()}"
+                        emptyMessage="There no boxes/machines booked as of now.">
+                        
+                        <p:column selectionMode="single" style="width:16px;text-align:center"/>
+                        
+					    <p:column headerText="Box Name" style="text-align:center">
+					        <h:outputText value="#{booking.boxName}" />
+					    </p:column>
+					 
+					    <p:column headerText="Box Owner" style="text-align:center">
+					        <h:outputText value="#{booking.boxOwner}" />
+					    </p:column>
+					    
+					    <p:column headerText="Curernt User" style="text-align:center">
+					        <h:outputText id="userName" value="#{booking.currentUser.userName}" />
+					        <p:tooltip for="userName" value="#{booking.currentUser.email}" trackMouse="true" showEffect="clip"/>
+					    </p:column>
+					    
+					    <p:column headerText="Team Name (Current User)" style="text-align:center">
+					        <h:outputText value="#{booking.currentUser.teamName}" />
+					    </p:column>
+					 
+					    <f:facet name="footer">
+					    	<h:panelGrid columns="1" styleClass="panelNoBorder">
+						    	<p:commandButton process="bookingTblId" update="@form" icon="ui-icon-search" value="View Queue" 
+						    		oncomplete="PF('queueDlg').show()" rendered="#{boxbookingmb.bookings.size() > 0}"/>
+							</h:panelGrid>
+					    </f:facet>
+					</p:dataTable>
+				</p:panel>
+				<ui:include src="templates/default/loading.xhtml" />
+				
+				<p:dialog header="Users in Queue" widgetVar="queueDlg" modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+					width="550px" closeOnEscape="true" position="center middle">
+		            <h:panelGroup rendered="#{boxbookingmb.selectedRow != null}">
+		                <f:verbatim><br/></f:verbatim>
+		                <p:dataTable var="queuedUser" value="#{boxbookingmb.selectedRow.usersInQueue}"
+							rows="10" paginator="#{boxbookingmb.bookings.size() > 10}" reflow="true" rowsPerPageTemplate="10,15,20"
+	                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                        emptyMessage="There are no queued users as of now.">
+						    
+						    <p:column headerText="Queued User" style="text-align:center">
+						        <h:outputText id="userName" value="#{queuedUser.userName}" />
+						        <p:tooltip for="userName" value="#{queuedUser.email}" trackMouse="true" showEffect="clip"/>
+						    </p:column>
+						    
+						    <p:column headerText="Team Name" style="text-align:center">
+						        <h:outputText value="#{queuedUser.teamName}" />
+						    </p:column>
+						</p:dataTable>
+		            </h:panelGroup>
+		            <h:panelGroup rendered="#{boxbookingmb.selectedRow == null}">
+		            	<f:verbatim><br/></f:verbatim>
+		            	<div class="ui-message-warn ui-corner-all">
+						      <span class="ui-message-warn-icon"/>
+						      <span class="ui-message-warn-detail">Please select a Box Name and Click on 'View Queue'.</span>
+						</div>
+		            </h:panelGroup>
+		            <f:verbatim><br/><br/></f:verbatim>
+		            <p:commandButton value="Close" onclick="PF('queueDlg').hide()"/>
+			    </p:dialog>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

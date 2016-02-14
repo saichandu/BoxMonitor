@@ -1,0 +1,37 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition template="./index.xhtml">
+		<ui:define name="content">
+			<h:form id="queueform">
+				<p:panel id="queueformPanel" header="Users in Queue">
+					<p:messages autoUpdate="true"/>
+					<f:verbatim><br/></f:verbatim>
+					<h:outputText value="Selected Box/Machine : &lt;b&gt;#{boxbookingmb.boxselected}&lt;/b&gt;" escape="false" style="float:left"/>
+					<f:verbatim><br/><br/></f:verbatim>
+					<p:dataTable var="queuedUser" value="#{boxbookingmb.selectedRow.usersInQueue}"
+						rows="10" paginator="#{boxbookingmb.selectedRow.usersInQueue != null and boxbookingmb.selectedRow.usersInQueue.size() > 10}" reflow="true" 
+						rowsPerPageTemplate="10,15,20" emptyMessage="There are no queued users as of now."
+                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                        rowStyleClass="#{queuedUser.highlight == true ? 'highlight' : ''}">
+					    
+					    <p:column headerText="User next in Queue" style="text-align:center">
+					        <h:outputText id="userName" value="#{queuedUser.userName}" />
+					        <p:tooltip for="userName" value="#{queuedUser.email}" trackMouse="true" showEffect="clip"/>
+					    </p:column>
+					    
+					    <p:column headerText="Team Name" style="text-align:center">
+					        <h:outputText value="#{queuedUser.teamName}" />
+					    </p:column>
+					</p:dataTable>
+				</p:panel>
+				<ui:include src="templates/default/loading.xhtml" />
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

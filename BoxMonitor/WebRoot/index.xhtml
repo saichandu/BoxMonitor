@@ -1,0 +1,34 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<f:facet name="first">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<title>Box Monitor</title>
+		<link rel="shortcut icon"
+			href="#{request.contextPath}/resources/images/icon.png"
+			type="image/x-icon" />
+	</f:facet>
+	<f:facet name="middle">
+	</f:facet>
+
+	<f:facet name="last">
+		<h:outputStylesheet name="css/global.css" />
+	</f:facet>
+</h:head>
+<h:body>
+	<ui:insert name="header">
+		<ui:include src="templates/default/header.xhtml" />
+	</ui:insert>
+	<center>
+		<div class="indexContent">
+			<ui:insert name="content">
+			</ui:insert>
+		</div>
+	</center>
+</h:body>
+</html>

@@ -1,0 +1,23 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition>
+	<h:form id="footer">
+		<div class="container">
+			<center><div> Best viewed in Firefox and Chrome. </div></center>
+			<div class="bottom-fotter">
+				<div class="col-md-5">#{properties.Txt_COPYRIGHT}</div>
+				<div class="col-md-7">
+					<ul class="footer-nav">
+						<li><a href="#{request.contextPath}/pages/home/news.xhtml">#{properties.TITLE_NEWS_PAGE}</a></li>
+						<li><a href="#{request.contextPath}/pages/home/faqs.xhtml">#{properties.TITLE_FAQS_PAGE}</a></li>
+						<li><a href="#{request.contextPath}/pages/home/help.xhtml">#{properties.TITLE_HELP_PAGE}</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</h:form>
+</ui:composition>
+</html>

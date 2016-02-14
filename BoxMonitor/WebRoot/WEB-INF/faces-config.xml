@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faces-config
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+    version="2.0">
+	<factory>
+		<exception-handler-factory>com.exception.CustomExceptionHandlerFactory</exception-handler-factory>
+	</factory>
+	<navigation-rule>
+		<from-view-id>/registration.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>boxbooking</from-outcome>
+			<to-view-id>/boxbooking.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/boxbooking.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>listofbookings</from-outcome>
+			<to-view-id>/listofbookings.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/boxbooking.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>usersinqueue</from-outcome>
+			<to-view-id>/usersinqueue.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+</faces-config>

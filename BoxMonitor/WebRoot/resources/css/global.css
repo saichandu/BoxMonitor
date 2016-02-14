@@ -1,0 +1,27 @@
+@CHARSET "ISO-8859-1";
+
+.indexContent {
+	margin-top: 4%;
+	margin-left: 15%;
+	margin-right: 15%
+}
+
+.ui-messages-info-summary,.ui-messages-warn-summary,.ui-messages-error-summary,.ui-messages-fatal-summary,.ui-message-info-summary,.ui-message-warn-summary,.ui-message-error-summary,.ui-message-fatal-summary
+	{
+	font-size: 14px !important;
+}
+
+.panelNoBorder,.panelNoBorder tr,.panelNoBorder td {
+	border: hidden;
+	border-color: #6ca6cf;
+}
+
+.highlight {
+	background: #6bdb6b !important;
+	font-weight: bold !important;
+}
+
+.menu {
+	margin-left: 15%;
+	margin-top: 3%;
+}

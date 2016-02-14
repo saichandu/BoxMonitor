@@ -1,0 +1,42 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition template="./index.xhtml">
+		<ui:define name="content">
+			<h:form id="bookingForm">
+				<p:panel id="bookingPanel" header="Box Booking">
+					<p:messages autoUpdate="true" escape="false"/>
+					<p:focus context="bookingPanel" />
+
+					<h:panelGrid columns="2" cellpadding="8" cellspacing="8">
+						<p:outputLabel for="email" value="Email" />
+						<p:inputText id="email" value="#{boxbookingmb.email}" required="true"
+							label="Surname" />
+						
+						<p:outputLabel for="boxname" value="Box Name" />
+				       	<p:selectOneMenu id="boxname" value="#{boxbookingmb.boxselected}" required="true">
+				            <f:selectItem itemLabel="Select One" itemValue="" />
+				            <f:selectItems value="#{boxbookingmb.boxes}" />
+				        </p:selectOneMenu>
+						
+						<p:outputLabel for="estimatedusage" value="Estimated Usage (in mins)" />
+						<p:inputText id="estimatedusage" value="#{boxbookingmb.estimatedUsage}"
+							label="estimatedusage" converterMessage="Estimated Usage: Validation Error: Please enter digits only.">
+						</p:inputText>
+						
+						<f:verbatim><br/></f:verbatim>
+
+						<p:commandButton id="submitButton" value="Book" update="@form"
+							action="#{boxbookingmb.book}" />
+					</h:panelGrid>
+				</p:panel>
+				<ui:include src="templates/default/loading.xhtml" />
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

@@ -1,0 +1,43 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition template="./index.xhtml">
+		<ui:define name="content">
+			<h:form id="regForm">
+				<p:panel id="regPanel" header="Registration">
+					<p:messages autoUpdate="true" escape="false"/>
+					<p:focus context="regPanel" />
+
+					<h:panelGrid columns="2" cellpadding="8" cellspacing="8">
+						<p:outputLabel for="username" value="Username" />
+						<p:inputText id="username" value="#{registrationmb.username}"
+							required="true" label="username">
+							<f:validateLength minimum="2" />
+						</p:inputText>
+
+						<p:outputLabel for="email" value="Email" />
+						<p:inputText id="email" value="#{registrationmb.email}" required="true"
+							label="Surname" style="text-transform: lowercase"/>
+						
+						<p:outputLabel for="teamname" value="Team Name" />
+						<p:inputText id="teamname" value="#{registrationmb.teamname}"
+							required="true" label="teamname" style="text-transform: uppercase">
+							<f:validateLength minimum="2" />
+						</p:inputText>
+						
+						<f:verbatim><br/></f:verbatim>
+
+						<p:commandButton id="submitButton" value="Save" update="@form"
+							action="#{registrationmb.registerUser}" disabled="#{registrationmb.status}"/>
+					</h:panelGrid>
+				</p:panel>
+				<ui:include src="templates/default/loading.xhtml" />
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

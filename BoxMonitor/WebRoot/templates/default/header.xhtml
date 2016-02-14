@@ -1,0 +1,19 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+	<h:form id="header">
+		<h:panelGrid columns="5" styleClass="menu">
+			<p:commandButton value="Home" action="listofbookings"/>
+			<p:spacer width="10" height="1"/>
+			<p:commandButton value="Register" action="registration"/>
+			<p:spacer width="10" height="1"/>
+			<p:commandButton value="Book Box" action="boxbooking"/>
+		</h:panelGrid>
+		<ui:include src="loading.xhtml" />
+	</h:form>
+</ui:composition>
+</html>
