@@ -44,10 +44,9 @@
 					    </f:facet>
 					</p:dataTable>
 				</p:panel>
-				<ui:include src="templates/default/loading.xhtml" />
 				
 				<p:dialog header="Users in Queue" widgetVar="queueDlg" modal="true" showEffect="fade" hideEffect="fade" resizable="false"
-					width="550px" closeOnEscape="true" position="center middle">
+					width="650px" closeOnEscape="true" position="center middle">
 		            <h:panelGroup rendered="#{boxbookingmb.selectedRow != null}">
 		                <f:verbatim><br/></f:verbatim>
 		                <p:dataTable var="queuedUser" value="#{boxbookingmb.selectedRow.usersInQueue}"
@@ -56,12 +55,16 @@
 	                        emptyMessage="There are no queued users as of now.">
 						    
 						    <p:column headerText="Queued User" style="text-align:center">
-						        <h:outputText id="userName" value="#{queuedUser.userName}" />
-						        <p:tooltip for="userName" value="#{queuedUser.email}" trackMouse="true" showEffect="clip"/>
+						        <h:outputText id="userName1" value="#{queuedUser.userName}" />
+						        <p:tooltip for="userName1" value="#{queuedUser.email}" trackMouse="true" showEffect="clip"/>
 						    </p:column>
 						    
 						    <p:column headerText="Team Name" style="text-align:center">
 						        <h:outputText value="#{queuedUser.teamName}" />
+						    </p:column>
+						    
+						    <p:column headerText="Estimated Usage Time (in mins)" style="text-align:center">
+						        <h:outputText value="#{queuedUser.estimatedUsage}" />
 						    </p:column>
 						</p:dataTable>
 		            </h:panelGroup>

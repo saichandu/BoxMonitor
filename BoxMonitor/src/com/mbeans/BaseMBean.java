@@ -1,5 +1,7 @@
 package com.mbeans;
 
+import java.io.Serializable;
+
 import javax.el.ELContext;
 import javax.el.ExpressionFactory;
 import javax.el.MethodExpression;
@@ -23,8 +25,10 @@ import com.util.EmailValidator;
 /**
  * @author saavvaru Created May 31st 2015
  */
-public class BaseMBean {
-	
+public class BaseMBean implements Serializable{
+
+	private static final long serialVersionUID = 2501203051160278144L;
+
 	public void addErrorMessage(final String message) {
 		FacesContext.getCurrentInstance().addMessage(null,
 				new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));

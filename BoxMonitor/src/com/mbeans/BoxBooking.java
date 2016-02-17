@@ -30,6 +30,9 @@ import com.vo.User;
 @ViewScoped
 @ManagedBean(name="boxbookingmb")
 public class BoxBooking extends BaseMBean {
+	
+	private static final long serialVersionUID = 3071152249212006233L;
+	
 	private String email;
 	private String boxselected;
 	private int estimatedUsage;
@@ -179,6 +182,7 @@ public class BoxBooking extends BaseMBean {
 				//EmailServiceImpl.getInstance().sendMail(props, email, subject, body);
 				EmailServiceImpl.getInstance().sendGMail(props, email, subject, body);
 			} catch (Exception e) {
+				
 				throw new ApplicationException(MessagesEnum.EMAIL_SENDING_FAILED.getMessage(email));
 			}
 		}

@@ -176,7 +176,7 @@ public class DataAccess {
 								List.class).get(0))
 								.getString(DBConstants.TEAM_NAME),
 						document.getDate(DBConstants.DATE_N_TIME));
-				
+				user.setEstimatedUsage(document.getInteger(DBConstants.ESTIMATED_USAGE));
 				if (!bookings.containsKey(document.getString(DBConstants.BOX_NAME))) {
 					Booking bkng = new Booking();
 					bkng.setBoxName(document.getString(DBConstants.BOX_NAME));
@@ -208,12 +208,12 @@ public class DataAccess {
 		return true;
 	}
 	
-	public User getAllBookings(final String boxName) {
+	public List<User> getAllBookings(final String boxName) {
 		/**
 		 * Creating 'nextUserEmailInQueue' as string buffer because 
 		 * value cannot be reassigned as it is declared as final
 		 */
-		final User user = new User();
+		final List<User> users = new ArrayList<User>();
 		try {
 			final MongoDatabase mdb = MongoDBConnManager.getInstance().getConnection();
 			final MongoCollection<Document> coll = mdb.getCollection(DBConstants.COLL_BOOKING);
@@ -224,8 +224,35 @@ public class DataAccess {
 			final ArrayList<Document> lstBkngs = coll.find(findCr).sort(sortCr).into(new ArrayList<Document>());
 			
 			for (final Document document : lstBkngs) {
+				final User user = new User();
 				user.setEmail(document.getString(DBConstants.EMAIL));
 				user.setBookingId(document.getString(DBConstants.BOOKING_ID));
+				users.add(user);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new ApplicationException(MessagesEnum.BOOKINGS_RETRIVAL_FAILED.getMessage(), e);
+		}
+		return users;
+	}
+	
+	public User getBooking(final String bookingId) {
+		/**
+		 * Creating 'nextUserEmailInQueue' as string buffer because 
+		 * value cannot be reassigned as it is declared as final
+		 */
+		final User user = new User();
+		try {
+			final MongoDatabase mdb = MongoDBConnManager.getInstance().getConnection();
+			final MongoCollection<Document> coll = mdb.getCollection(DBConstants.COLL_BOOKING);
+			final Document findCr = new Document();
+			findCr.put(DBConstants.BOOKING_ID, bookingId);
+			final Document sortCr = new Document();
+			sortCr.put(DBConstants.DATE_N_TIME, -1);
+			final ArrayList<Document> lstBkngs = coll.find(findCr).sort(sortCr).into(new ArrayList<Document>());
+			
+			for (final Document document : lstBkngs) {
+				user.setEmail(document.getString(DBConstants.EMAIL));
 				break;
 			}
 		} catch (Exception e) {

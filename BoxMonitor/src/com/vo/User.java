@@ -9,6 +9,7 @@ public class User implements Comparable<User>{
 	private boolean highlight;
 	private Date dateNTime;
 	private String bookingId;
+	private int estimatedUsage;
 	
 	public User() {}
 	
@@ -52,6 +53,14 @@ public class User implements Comparable<User>{
 
 	public void setBookingId(String bookingId) {
 		this.bookingId = bookingId;
+	}
+
+	public int getEstimatedUsage() {
+		return estimatedUsage;
+	}
+
+	public void setEstimatedUsage(int estimatedUsage) {
+		this.estimatedUsage = estimatedUsage;
 	}
 
 	@Override

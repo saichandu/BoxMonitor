@@ -13,6 +13,9 @@ import com.exception.MessagesEnum;
 @ViewScoped
 @ManagedBean(name="registrationmb")
 public class UserRegistration extends BaseMBean {
+	
+	private static final long serialVersionUID = -2062150247677770416L;
+	
 	private String username;
 	private String email;
 	private String teamname;

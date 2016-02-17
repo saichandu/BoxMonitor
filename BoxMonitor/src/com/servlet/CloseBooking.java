@@ -2,6 +2,7 @@ package com.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Properties;
 
 import javax.servlet.ServletException;
@@ -29,6 +30,7 @@ public class CloseBooking extends HttpServlet {
 		boolean result = false;
 		PrintWriter out = response.getWriter();
 		try {
+			final User booking  = DataAccess.getInstance().getBooking(bookingId);
 			result = DataAccess.getInstance().closeBooking(bookingId);
 			if (result) {
 				out.println("Success.");
@@ -36,9 +38,16 @@ public class CloseBooking extends HttpServlet {
 				out.println("Failed.");
 			}
 			
-			final User nextUserInQueue = DataAccess.getInstance().getAllBookings(boxName);
+			final List<User> usersInQueue = DataAccess.getInstance().getAllBookings(boxName);
 			
-			if (nextUserInQueue != null && StringUtils.isNotBlank(nextUserInQueue.getEmail())) {
+			int index = 0;
+			for (User nextUser : usersInQueue) {
+				if (StringUtils.equalsIgnoreCase(booking.getEmail(), nextUser.getEmail())) {
+					break;
+				}
+				index++;
+			}
+			if (index == 0 || index == usersInQueue.size()) {
 				final String subject = MessagesEnum.SLOT_AVAILABLE_EMAIL_SUBJECT_TEMPLATE.getMessage(boxName);
 				final String body = MessagesEnum.SLOT_AVAILABLE_EMAIL_BODY_TEMPLATE
 									.getMessage(
@@ -47,14 +56,14 @@ public class CloseBooking extends HttpServlet {
 											"" + request.getServerPort() + "",
 											request.getContextPath().substring(1,
 													request.getContextPath().length()),
-											boxName, nextUserInQueue.getBookingId(), "saavvaru@deloitte.com");
+											boxName, usersInQueue.get(0).getBookingId(), "saavvaru@deloitte.com");
 				
 				final Properties props = PropertiesUtil.getInstance().getEmailProps();
 				try {
 					//EmailServiceImpl.getInstance().sendMail(props, email, subject, body);
-					EmailServiceImpl.getInstance().sendGMail(props, nextUserInQueue.getEmail(), subject, body);
+					EmailServiceImpl.getInstance().sendGMail(props, usersInQueue.get(0).getEmail(), subject, body);
 				} catch (Exception e) {
-					throw new ApplicationException(MessagesEnum.EMAIL_SENDING_FAILED.getMessage(nextUserInQueue.getEmail()));
+					throw new ApplicationException(MessagesEnum.EMAIL_SENDING_FAILED.getMessage(usersInQueue.get(0).getEmail()));
 				}
 			}
 		} catch (ApplicationException e){

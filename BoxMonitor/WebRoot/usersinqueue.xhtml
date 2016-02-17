@@ -27,9 +27,12 @@
 					    <p:column headerText="Team Name" style="text-align:center">
 					        <h:outputText value="#{queuedUser.teamName}" />
 					    </p:column>
+					    
+					    <p:column headerText="Estimated Usage Time (in mins)" style="text-align:center">
+					        <h:outputText value="#{queuedUser.estimatedUsage}" />
+					    </p:column>
 					</p:dataTable>
 				</p:panel>
-				<ui:include src="templates/default/loading.xhtml" />
 			</h:form>
 		</ui:define>
 	</ui:composition>
