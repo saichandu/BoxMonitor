@@ -39,7 +39,9 @@ public class CloseBooking extends HttpServlet {
 			}
 			
 			final List<User> usersInQueue = DataAccess.getInstance().getAllBookings(boxName);
-			
+			if (usersInQueue.size() == 0) {
+				return;
+			}
 			int index = 0;
 			for (User nextUser : usersInQueue) {
 				if (StringUtils.equalsIgnoreCase(booking.getEmail(), nextUser.getEmail())) {
