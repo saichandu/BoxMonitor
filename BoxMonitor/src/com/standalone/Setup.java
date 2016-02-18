@@ -1,10 +1,12 @@
 package com.standalone;
 
 import java.io.IOException;
+import java.util.Date;
 
 import org.bson.Document;
 
 import com.mongodb.MongoClient;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
@@ -31,7 +33,11 @@ public class Setup {
 		
 		coll.insertOne(doc1);
 		coll.insertOne(doc2);*/
-		
+		FindIterable<Document> s = coll.find();
+		Document d = s.iterator().next();
+		System.out.println(d.get("date_n_time"));
+		final int MILLI_TO_MINS = 1000 * 60;
+	    System.out.println((new Date().getTime() - d.getDate("date_n_time").getTime())/MILLI_TO_MINS);
 		client.close();
 	}
 	

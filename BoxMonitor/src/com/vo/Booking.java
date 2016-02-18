@@ -1,9 +1,13 @@
 package com.vo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Booking {
+public class Booking implements Serializable{
+	
+	private static final long serialVersionUID = 5949997812451286612L;
+	
 	private String boxName;
 	private String boxOwner;
 	private User currentUser;

@@ -8,7 +8,7 @@
 	<ui:composition template="./index.xhtml">
 		<ui:define name="content">
 			<h:form id="bookingLstForm">
-				<p:panel id="bookingLstPanel" header="Bookings Sheet">
+				<p:panel id="bookingLstPanel" header="Bookings">
 					<p:messages autoUpdate="true" escape="false"/>
 					<f:verbatim><br/></f:verbatim>
 					<p:dataTable id="bookingTblId" var="booking" value="#{boxbookingmb.bookings}"
@@ -46,33 +46,37 @@
 				</p:panel>
 				
 				<p:dialog header="Users in Queue" widgetVar="queueDlg" modal="true" showEffect="fade" hideEffect="fade" resizable="false"
-					width="850px" closeOnEscape="true" position="center middle">
+					width="900px" closeOnEscape="true" position="center middle">
 		            <h:panelGroup rendered="#{boxbookingmb.selectedRow != null}">
 		                <f:verbatim><br/></f:verbatim>
 		                <p:dataTable var="queuedUser" value="#{boxbookingmb.selectedRow.usersInQueue}"
 							rows="10" paginator="#{boxbookingmb.bookings.size() > 10}" reflow="true" rowsPerPageTemplate="10,15,20"
 	                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 	                        emptyMessage="There are no queued users as of now.">
-						    
-						    <p:column headerText="Queued User" style="text-align:center">
+	                        <!-- rowStyleClass="#{queuedUser.remainingTime == 0 ? 'highlight1' : ''}"> -->
+
+						    <p:column headerText="Queued User" style="text-align:center;">
 						        <h:outputText id="userName1" value="#{queuedUser.userName}" />
 						        <p:tooltip for="userName1" value="#{queuedUser.email}" trackMouse="true" showEffect="clip"/>
 						    </p:column>
 						    
-						    <p:column headerText="Team Name" style="text-align:center">
+						    <p:column headerText="Team Name" style="text-align:center;">
 						        <h:outputText value="#{queuedUser.teamName}" />
 						    </p:column>
 						    
+						    <!-- <p:column headerText="Remaining Time of Usage (in mins)" style="text-align:center">
+						        <h:outputText value="#{queuedUser.remainingTime}" />
+						    </p:column> -->
 						    <p:column headerText="Estimated Usage Time (in mins)" style="text-align:center">
 						        <h:outputText value="#{queuedUser.estimatedUsage}" />
 						    </p:column>
 						    
 						    <p:column headerText="Booked Time" style="text-align:center">
-						        <h:outputText value="#{queuedUser.dateNTime}">
-						        	<f:convertDateTime pattern="dd MMM, yyyy hh:mm" />
-						        </h:outputText>
+						        <h:outputText value="#{queuedUser.time}"/>
 						    </p:column>
 						</p:dataTable>
+						<!-- <f:verbatim><br/></f:verbatim>
+						<p:outputLabel value="Note: The rows which are hightlighted in Red color are timed out."/> -->
 		            </h:panelGroup>
 		            <h:panelGroup rendered="#{boxbookingmb.selectedRow == null}">
 		            	<f:verbatim><br/></f:verbatim>

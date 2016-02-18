@@ -167,15 +167,15 @@ public class DataAccess {
 			final ArrayList<Document> bookingsFromDB = coll.aggregate(aggregates).into(new ArrayList<Document>());
 			
 			for (final Document document : bookingsFromDB) {
-				final User user = new User(
-						((Document) document.get("join_for_username",
+				final User user = new User();
+				user.setUserName(((Document) document.get("join_for_username",
 								List.class).get(0))
-								.getString(DBConstants.USER_NAME),
-						document.getString(DBConstants.EMAIL),
-						((Document) document.get("join_for_username",
+								.getString(DBConstants.USER_NAME));
+				user.setEmail(document.getString(DBConstants.EMAIL));
+				user.setTeamName(((Document) document.get("join_for_username",
 								List.class).get(0))
-								.getString(DBConstants.TEAM_NAME),
-						document.getDate(DBConstants.DATE_N_TIME));
+								.getString(DBConstants.TEAM_NAME));
+				user.setDateNTime(document.getDate(DBConstants.DATE_N_TIME));
 				user.setEstimatedUsage(document.getInteger(DBConstants.ESTIMATED_USAGE));
 				if (!bookings.containsKey(document.getString(DBConstants.BOX_NAME))) {
 					Booking bkng = new Booking();
@@ -220,12 +220,13 @@ public class DataAccess {
 			final Document findCr = new Document();
 			findCr.put(DBConstants.BOX_NAME, boxName);
 			final Document sortCr = new Document();
-			sortCr.put(DBConstants.DATE_N_TIME, -1);
+			sortCr.put(DBConstants.DATE_N_TIME, 1);
 			final ArrayList<Document> lstBkngs = coll.find(findCr).sort(sortCr).into(new ArrayList<Document>());
 			
 			for (final Document document : lstBkngs) {
 				final User user = new User();
 				user.setEmail(document.getString(DBConstants.EMAIL));
+				user.setDateNTime(document.getDate(DBConstants.DATE_N_TIME));
 				user.setBookingId(document.getString(DBConstants.BOOKING_ID));
 				users.add(user);
 			}

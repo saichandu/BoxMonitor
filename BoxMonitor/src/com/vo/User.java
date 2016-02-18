@@ -1,25 +1,26 @@
 package com.vo;
 
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class User implements Comparable<User>{
+public class User implements Comparable<User>, Serializable{
+
+	private static final long serialVersionUID = 5594639977096859751L;
+
+	final static int MILLI_TO_MINS = 1000 * 60;
+	
 	private String userName;
 	private String email;
 	private String teamName;
 	private boolean highlight;
 	private Date dateNTime;
+	private String time;
 	private String bookingId;
 	private int estimatedUsage;
+	//private int remainingTime;
 	
 	public User() {}
-	
-	public User(final String userName, final String email, final String teamName, final Date dateNTime) {
-		super();
-		this.userName = userName;
-		this.email = email;
-		this.teamName = teamName;
-		this.dateNTime = dateNTime;
-	}
 	
 	public String getEmail() {
 		return email;
@@ -63,9 +64,37 @@ public class User implements Comparable<User>{
 		this.estimatedUsage = estimatedUsage;
 	}
 
+	/*public int getRemainingTime() {
+		this.remainingTime = estimatedUsage - (int)((new Date().getTime() - this.getDateNTime().getTime())/MILLI_TO_MINS);
+		this.remainingTime = this.remainingTime < 0 ? 0 : remainingTime;
+		return remainingTime;
+	}*/
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public void setTeamName(String teamName) {
+		this.teamName = teamName;
+	}
+
+	public void setDateNTime(Date dateNTime) {
+		this.dateNTime = dateNTime;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+
+	public String getTime() {
+		SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, YYYY hh:mm a");
+		this.time = sdf.format(dateNTime);
+		return time;
+	}
+
 	@Override
 	public int compareTo(User obj) {
-		if (obj != null && obj.getDateNTime().after(this.getDateNTime())) {
+		if (obj != null && obj.getDateNTime().before(this.getDateNTime())) {
 			return 1;
 		}
 		return -1;

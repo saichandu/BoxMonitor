@@ -30,26 +30,29 @@ public class CloseBooking extends HttpServlet {
 		boolean result = false;
 		PrintWriter out = response.getWriter();
 		try {
+			final List<User> usersInQueue = DataAccess.getInstance().getAllBookings(boxName);
+			//Collections.sort(usersInQueue);
 			final User booking  = DataAccess.getInstance().getBooking(bookingId);
 			result = DataAccess.getInstance().closeBooking(bookingId);
 			if (result) {
 				out.println("Success.");
 			} else {
 				out.println("Failed.");
-			}
-			
-			final List<User> usersInQueue = DataAccess.getInstance().getAllBookings(boxName);
-			if (usersInQueue.size() == 0) {
 				return;
 			}
+			
 			int index = 0;
-			for (User nextUser : usersInQueue) {
-				if (StringUtils.equalsIgnoreCase(booking.getEmail(), nextUser.getEmail())) {
+			User nextUserInQueue = null; 
+			for (User user : usersInQueue) {
+				if (StringUtils.equalsIgnoreCase(booking.getEmail(), user.getEmail())) {
 					break;
 				}
 				index++;
 			}
-			if (index == 0 || index == usersInQueue.size()) {
+			if (index == 0 && usersInQueue.size() > 1) {
+				nextUserInQueue = usersInQueue.get(1);
+			}
+			if (nextUserInQueue != null) {
 				final String subject = MessagesEnum.SLOT_AVAILABLE_EMAIL_SUBJECT_TEMPLATE.getMessage(boxName);
 				final String body = MessagesEnum.SLOT_AVAILABLE_EMAIL_BODY_TEMPLATE
 									.getMessage(
@@ -59,12 +62,12 @@ public class CloseBooking extends HttpServlet {
 											"" + request.getServerPort() + "",
 											request.getContextPath().substring(1,
 													request.getContextPath().length()),
-											boxName, usersInQueue.get(0).getBookingId(), "saavvaru@deloitte.com");
+											boxName, nextUserInQueue.getBookingId(), "saavvaru@deloitte.com");
 				
 				final Properties props = PropertiesUtil.getInstance().getEmailProps();
 				try {
 					//EmailServiceImpl.getInstance().sendMail(props, email, subject, body);
-					EmailServiceImpl.getInstance().sendGMail(props, usersInQueue.get(0).getEmail(), subject, body);
+					EmailServiceImpl.getInstance().sendGMail(props, nextUserInQueue.getEmail(), subject, body);
 				} catch (Exception e) {
 					throw new ApplicationException(MessagesEnum.EMAIL_SENDING_FAILED.getMessage(usersInQueue.get(0).getEmail()));
 				}
