@@ -46,7 +46,7 @@
 				</p:panel>
 				
 				<p:dialog header="Users in Queue" widgetVar="queueDlg" modal="true" showEffect="fade" hideEffect="fade" resizable="false"
-					width="650px" closeOnEscape="true" position="center middle">
+					width="850px" closeOnEscape="true" position="center middle">
 		            <h:panelGroup rendered="#{boxbookingmb.selectedRow != null}">
 		                <f:verbatim><br/></f:verbatim>
 		                <p:dataTable var="queuedUser" value="#{boxbookingmb.selectedRow.usersInQueue}"
@@ -65,6 +65,12 @@
 						    
 						    <p:column headerText="Estimated Usage Time (in mins)" style="text-align:center">
 						        <h:outputText value="#{queuedUser.estimatedUsage}" />
+						    </p:column>
+						    
+						    <p:column headerText="Booked Time" style="text-align:center">
+						        <h:outputText value="#{queuedUser.dateNTime}">
+						        	<f:convertDateTime pattern="dd MMM, yyyy hh:mm" />
+						        </h:outputText>
 						    </p:column>
 						</p:dataTable>
 		            </h:panelGroup>

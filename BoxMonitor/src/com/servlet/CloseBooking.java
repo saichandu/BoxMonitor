@@ -54,7 +54,8 @@ public class CloseBooking extends HttpServlet {
 				final String body = MessagesEnum.SLOT_AVAILABLE_EMAIL_BODY_TEMPLATE
 									.getMessage(
 											boxName,
-											request.getServerName(),
+											//request.getServerName(),
+											"ushydsaavvaru9",
 											"" + request.getServerPort() + "",
 											request.getContextPath().substring(1,
 													request.getContextPath().length()),

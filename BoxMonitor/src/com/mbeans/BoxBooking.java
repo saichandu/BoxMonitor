@@ -170,7 +170,8 @@ public class BoxBooking extends BaseMBean {
 			final String body = MessagesEnum.BOOKING_EMAIL_BODY_TEMPLATE
 								.getMessage(
 										boxselected,
-										ctxt.getRequestServerName(),
+										"ushydsaavvaru9",
+										//ctxt.getRequestServerName(),
 										"" + ctxt.getRequestServerPort() + "",
 										ctxt.getRequestContextPath().substring(1,
 												ctxt.getRequestContextPath().length()),
