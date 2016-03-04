@@ -11,7 +11,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.faces.context.Flash;
 import javax.faces.model.SelectItem;
 import javax.faces.model.SelectItemGroup;
 
@@ -49,9 +48,15 @@ public class BoxBooking extends BaseMBean {
 	}
 
 	public String getBoxselected() {
-		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
+		/*Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
 		if (selectedRow == null && flash.get(ApplicationConstants.CURRENT_BOX_BOOKING) != null) {
 			selectedRow = (Booking) flash.get(ApplicationConstants.CURRENT_BOX_BOOKING);
+		}*/
+		FacesContext context = FacesContext.getCurrentInstance();
+		Object currBooking = context.getExternalContext().getRequestMap()
+				.get(ApplicationConstants.CURRENT_BOX_BOOKING);
+		if (selectedRow == null && currBooking != null) {
+			selectedRow = (Booking) currBooking;
 		}
 		if (selectedRow != null) {
 			setBoxselected(selectedRow.getBoxName());
@@ -148,11 +153,14 @@ public class BoxBooking extends BaseMBean {
 			
 			bookings = new ArrayList<Booking>(bookingsMap.values());
 			
-			Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
+			/*Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
 			flash.put(ApplicationConstants.CURRENT_BOX_BOOKING, bookingsMap.get(boxselected));
 			
 			flash.setKeepMessages(true);
-			flash.setRedirect(true);
+			flash.setRedirect(true);*/
+			FacesContext context = FacesContext.getCurrentInstance();
+			context.getExternalContext().getRequestMap().put(ApplicationConstants.CURRENT_BOX_BOOKING, bookingsMap.get(boxselected));
+			
 			super.addInfoMessage(MessagesEnum.BOOKING_SUCCESS.getMessage(
 					bookingInfo.get(DBConstants.BOX_NAME)));
 			
@@ -163,15 +171,14 @@ public class BoxBooking extends BaseMBean {
 			props.setProperty("mail.smtp.port", "25");
 			props.setProperty("mail.smtp.user", "donotreply@deloitte.com");*/
 			
-			final Properties props = PropertiesUtil.getInstance().getEmailProps();
+			final Properties props = PropertiesUtil.getInstance().getDmailProps();
 			
 			final ExternalContext ctxt = FacesContext.getCurrentInstance().getExternalContext();
 			final String subject = MessagesEnum.BOOKING_EMAIL_SUBJECT_TEMPLATE.getMessage(boxselected);
 			final String body = MessagesEnum.BOOKING_EMAIL_BODY_TEMPLATE
 								.getMessage(
 										boxselected,
-										"ushydsaavvaru9",
-										//ctxt.getRequestServerName(),
+										ctxt.getRequestServerName(),
 										"" + ctxt.getRequestServerPort() + "",
 										ctxt.getRequestContextPath().substring(1,
 												ctxt.getRequestContextPath().length()),
@@ -180,8 +187,7 @@ public class BoxBooking extends BaseMBean {
 										"saavvaru@deloitte.com");
 			
 			try {
-				//EmailServiceImpl.getInstance().sendMail(props, email, subject, body);
-				EmailServiceImpl.getInstance().sendGMail(props, email, subject, body);
+				EmailServiceImpl.getInstance().sendMail(props, email, subject, body);
 			} catch (Exception e) {
 				
 				throw new ApplicationException(MessagesEnum.EMAIL_SENDING_FAILED.getMessage(email));

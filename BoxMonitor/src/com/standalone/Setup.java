@@ -38,10 +38,17 @@ public class Setup {
 		System.out.println(d.get("date_n_time"));
 		final int MILLI_TO_MINS = 1000 * 60;
 	    System.out.println((new Date().getTime() - d.getDate("date_n_time").getTime())/MILLI_TO_MINS);
+		
+		/*final Document emptyDoc = new Document();
+		coll.deleteMany(emptyDoc);*/
+		
 		client.close();
 	}
 	
 	//db.createCollection("users");
 	//db.users.createIndex({"email":1}, {unique:true});
 	//db.booking.createIndex({"email":1, "box_name":1}, {unique:true});
+	//mongoexport --db boxmonitor --collection users --out users_bkp.json
+	//mongodump --db boxmonitor
+	//mongorestore C:\Users\saavvaru\Documents\Softwares\MongoDB-3.2.1\bin\mongodump_3rdMarch2016\
 }

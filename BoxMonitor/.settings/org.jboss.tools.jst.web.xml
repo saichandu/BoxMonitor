@@ -28,6 +28,8 @@
  <file-system NAME="lib-mongodb-driver-core-3.2.1.jar"
   location="C:\Projects\BoxMonitor\WebRoot\WEB-INF\lib\mongodb-driver-core-3.2.1.jar" model-entity="FileSystemJar"/>
  <file-system NAME="BoxMonitor" location="%eclipse.project%" model-entity="FileSystemFolder"/>
+ <file-system NAME="lib-mail-1.4.7.jar"
+  location="C:\Projects\BoxMonitor\WebRoot\WEB-INF\lib\mail-1.4.7.jar" model-entity="FileSystemJar"/>
  <web SERVLET_VERSION="2.4" model-entity="JstWeb" model-path="/web.xml">
   <module URI="/WEB-INF/faces-config.xml" model-entity="WebJSFModule"
    model-path="/faces-config.xml" src="src" web-root="WEB-ROOT"/>

@@ -13,7 +13,7 @@ public class PropertiesUtil {
 	
 	private Properties props;
 	
-	private Properties emailprops;
+	private Properties gmailprops, dmailprops;
 	
 	private PropertiesUtil() {
 	}
@@ -37,17 +37,23 @@ public class PropertiesUtil {
 					.getResourceAsStream("../resources/Application.properties");
 			props.load(ipStream);
 			
-			emailprops = new Properties();
-			emailprops.put("mail.smtps.host","smtp.gmail.com");
-			emailprops.put("mail.transport.protocol", "smtp");
-			emailprops.put("mail.smtps.auth", "true");
-			emailprops.put("mail.smtp.port", 465);
-			emailprops.put("mail.smtp.socketFactory.port", 465);
-			emailprops.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-			emailprops.put("mail.smtp.socketFactory.fallback", "false");
-			emailprops.put("mail.smtp.ssl.enable", "true");
-			emailprops.put("mail.smtp.user", "boxmonitorapp@gmail.com");
-			emailprops.put("mail.smtp.password", "Welcome5$");
+			gmailprops = new Properties();
+			gmailprops.put("mail.smtps.host", props.getProperty("GMAIL_HOST"));
+			gmailprops.put("mail.transport.protocol", "smtp");
+			gmailprops.put("mail.smtps.auth", "true");
+			gmailprops.put("mail.smtp.port", props.getProperty("GMAIL_PORT"));
+			gmailprops.put("mail.smtp.socketFactory.port", props.getProperty("GMAIL_PORT"));
+			gmailprops.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+			gmailprops.put("mail.smtp.socketFactory.fallback", "false");
+			gmailprops.put("mail.smtp.ssl.enable", "true");
+			gmailprops.put("mail.smtp.user", props.getProperty("GMAIL_USER"));
+			gmailprops.put("mail.smtp.password", props.getProperty("GMAIL_PWD"));
+			
+			dmailprops = new Properties();
+			dmailprops.put("mail.transport.protocol", "smtp");
+			dmailprops.put("mail.host", props.getProperty("DELOITTEMAIL_HOST"));
+			dmailprops.put("mail.smtp.port", props.getProperty("DELOITTEMAIL_PORT"));
+			dmailprops.put("mail.smtp.user", props.getProperty("DELOITTEMAIL_USER"));
 		} catch (IOException e) {
 			throw new ApplicationException(MessagesEnum.APP_PROPERTIES_LOADING_FAILED.getMessage(), e);
 		} finally {
@@ -65,7 +71,11 @@ public class PropertiesUtil {
 		return props;
 	}
 	
-	public Properties getEmailProps() {
-		return emailprops;
+	public Properties getGmailProps() {
+		return gmailprops;
+	}
+	
+	public Properties getDmailProps() {
+		return dmailprops;
 	}
 }

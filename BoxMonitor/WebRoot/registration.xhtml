@@ -9,13 +9,13 @@
 		<ui:define name="content">
 			<h:form id="regForm">
 				<p:panel id="regPanel" header="Registration">
-					<p:messages autoUpdate="true" escape="false"/>
+					<p:messages escape="false"/>
 					<p:focus context="regPanel" />
 
 					<h:panelGrid columns="2" cellpadding="8" cellspacing="8">
 						<p:outputLabel for="username" value="Username" />
 						<p:inputText id="username" value="#{registrationmb.username}"
-							required="true" label="username">
+							required="true" label="username" style="text-transform: capitalize">
 							<f:validateLength minimum="2" />
 						</p:inputText>
 

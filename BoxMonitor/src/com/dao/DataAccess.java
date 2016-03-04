@@ -1,6 +1,7 @@
 package com.dao;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -177,6 +178,7 @@ public class DataAccess {
 								.getString(DBConstants.TEAM_NAME));
 				user.setDateNTime(document.getDate(DBConstants.DATE_N_TIME));
 				user.setEstimatedUsage(document.getInteger(DBConstants.ESTIMATED_USAGE));
+				user.setBookingId(document.getString(DBConstants.BOOKING_ID));
 				if (!bookings.containsKey(document.getString(DBConstants.BOX_NAME))) {
 					Booking bkng = new Booking();
 					bkng.setBoxName(document.getString(DBConstants.BOX_NAME));
@@ -188,6 +190,10 @@ public class DataAccess {
 					Booking bkng = bookings.get(document.getString(DBConstants.BOX_NAME));
 					bkng.addUserToQueue(user);
 				}
+			}
+			//sort users based on timestamps
+			for (Booking bkng : bookings.values()) {
+				Collections.sort(bkng.getUsersInQueue());
 			}
 		} catch (Exception e) {
 			throw new ApplicationException(MessagesEnum.BOOKINGS_RETRIVAL_FAILED.getMessage(), e);
@@ -248,18 +254,57 @@ public class DataAccess {
 			final MongoCollection<Document> coll = mdb.getCollection(DBConstants.COLL_BOOKING);
 			final Document findCr = new Document();
 			findCr.put(DBConstants.BOOKING_ID, bookingId);
-			final Document sortCr = new Document();
-			sortCr.put(DBConstants.DATE_N_TIME, -1);
-			final ArrayList<Document> lstBkngs = coll.find(findCr).sort(sortCr).into(new ArrayList<Document>());
+			final ArrayList<Document> lstBkngs = coll.find(findCr).into(new ArrayList<Document>());
 			
 			for (final Document document : lstBkngs) {
 				user.setEmail(document.getString(DBConstants.EMAIL));
-				break;
+				user.setBookingId(document.getString(DBConstants.BOOKING_ID));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new ApplicationException(MessagesEnum.BOOKINGS_RETRIVAL_FAILED.getMessage(), e);
 		}
 		return user;
+	}
+
+	@SuppressWarnings("deprecation")
+	public boolean passBooking(User currentUserBooking, User nextUserInQueue) {
+		try {
+			final MongoDatabase mdb = MongoDBConnManager.getInstance().getConnection();
+			final MongoCollection<Document> coll = mdb.getCollection(DBConstants.COLL_BOOKING);
+			final Document findCr = new Document();
+			findCr.put(DBConstants.BOOKING_ID, nextUserInQueue.getBookingId());
+			final ArrayList<Document> lstBkngs = coll.find(findCr).into(new ArrayList<Document>());
+			
+			for (final Document document : lstBkngs) {
+				java.util.Date nextUserBookingTime = document.getDate(DBConstants.DATE_N_TIME);
+				nextUserBookingTime.setSeconds(nextUserBookingTime.getSeconds() + 1);
+				currentUserBooking.setDateNTime(nextUserBookingTime);
+			}
+			
+			//update current user booking time
+			final Document filterQuery = new Document();
+			filterQuery.put(DBConstants.BOOKING_ID, currentUserBooking.getBookingId());
+			final Document updateQuery = new Document();
+			final Document updateSet = new Document();	
+			updateSet.put(DBConstants.DATE_N_TIME, currentUserBooking.getDateNTime());
+			updateQuery.put("$set", updateSet);
+			coll.updateOne(filterQuery, updateQuery);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new ApplicationException(MessagesEnum.PASSING_BOOKING_FAILED.getMessage(), e);
+		}
+		return true;
+	}
+	
+	public void clearAllBookings() {
+		try {
+			final MongoDatabase mdb = MongoDBConnManager.getInstance().getConnection();
+			final MongoCollection<Document> coll = mdb.getCollection(DBConstants.COLL_BOOKING);
+			final Document emptyDoc = new Document();
+			coll.deleteMany(emptyDoc);
+		} catch (Exception e) {
+			throw new ApplicationException(MessagesEnum.CLEAR_ALL_BOOKINGS_FAILED.getMessage(), e);
+		}
 	}
 }

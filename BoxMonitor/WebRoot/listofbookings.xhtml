@@ -9,7 +9,6 @@
 		<ui:define name="content">
 			<h:form id="bookingLstForm">
 				<p:panel id="bookingLstPanel" header="Bookings">
-					<p:messages autoUpdate="true" escape="false"/>
 					<f:verbatim><br/></f:verbatim>
 					<p:dataTable id="bookingTblId" var="booking" value="#{boxbookingmb.bookings}"
 						rows="10" paginator="#{boxbookingmb.bookings.size() > 10}" reflow="true" rowsPerPageTemplate="10,15,20"
@@ -71,9 +70,9 @@
 						        <h:outputText value="#{queuedUser.estimatedUsage}" />
 						    </p:column>
 						    
-						    <p:column headerText="Booked Time" style="text-align:center">
+						    <!-- <p:column headerText="Booked Time" style="text-align:center">
 						        <h:outputText value="#{queuedUser.time}"/>
-						    </p:column>
+						    </p:column> -->
 						</p:dataTable>
 						<!-- <f:verbatim><br/></f:verbatim>
 						<p:outputLabel value="Note: The rows which are hightlighted in Red color are timed out."/> -->

@@ -33,6 +33,10 @@
     <servlet-name>CloseBooking</servlet-name>
     <servlet-class>com.servlet.CloseBooking</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>PassBooking</servlet-name>
+    <servlet-class>com.servlet.PassBooking</servlet-class>
+  </servlet>
 
 
   <servlet-mapping>
@@ -44,10 +48,12 @@
     <servlet-name>CloseBooking</servlet-name>
     <url-pattern>/closebooking</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>PassBooking</servlet-name>
+    <url-pattern>/passbooking</url-pattern>
+  </servlet-mapping>
   
-  <listener>  
-    <listener-class>
-        com.listener.ApplicationContextListener
-    </listener-class>
-</listener> 
+   <listener>  
+    	<listener-class>com.listener.ApplicationContextListener</listener-class>
+   </listener> 
 </web-app>

@@ -19,7 +19,7 @@ import com.services.EmailServiceImpl;
 import com.util.PropertiesUtil;
 import com.vo.User;
 
-public class CloseBooking extends HttpServlet {
+public class PassBooking extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -32,32 +32,40 @@ public class CloseBooking extends HttpServlet {
 		try {
 			final List<User> usersInQueue = DataAccess.getInstance().getAllBookings(boxName);
 			//Collections.sort(usersInQueue);
-			final User booking  = DataAccess.getInstance().getBooking(bookingId);
-			result = DataAccess.getInstance().closeBooking(bookingId);
-			if (result) {
-				out.println("Success.");
-			} else {
-				out.println("Failed.");
-				return;
-			}
+			final User currentUserBooking  = DataAccess.getInstance().getBooking(bookingId);
 			
 			int index = 0;
 			User nextUserInQueue = null; 
 			for (User user : usersInQueue) {
-				if (StringUtils.equalsIgnoreCase(booking.getEmail(), user.getEmail())) {
+				if (StringUtils.equalsIgnoreCase(currentUserBooking.getEmail(), user.getEmail())) {
 					break;
 				}
 				index++;
 			}
-			if (index == 0 && usersInQueue.size() > 1) {
-				nextUserInQueue = usersInQueue.get(1);
+			
+			if (index == usersInQueue.size()) {
+				out.println("This booking is expired.");
+				return;
+			} else if ((index + 1) == usersInQueue.size()) {
+				out.println("No other users in Queue to pass the booking. Please close the booking.");
+				return;
+			} else {
+				nextUserInQueue = usersInQueue.get(index + 1);
+				result = DataAccess.getInstance().passBooking(currentUserBooking, nextUserInQueue);
+				if (result) {
+					out.println("Success.");
+				} else {
+					out.println("Failed.");
+					return;
+				}
 			}
-			if (nextUserInQueue != null) {
+			
+			if (result) {
 				final String subject = MessagesEnum.SLOT_AVAILABLE_EMAIL_SUBJECT_TEMPLATE.getMessage(boxName);
 				final String body = MessagesEnum.SLOT_AVAILABLE_EMAIL_BODY_TEMPLATE
 									.getMessage(
 											boxName,
-											booking.getUserName(),
+											currentUserBooking.getEmail(),
 											request.getServerName(),
 											"" + request.getServerPort() + "",
 											request.getContextPath().substring(1,
