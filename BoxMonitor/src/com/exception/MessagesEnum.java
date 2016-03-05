@@ -3,6 +3,7 @@ package com.exception;
 import java.text.MessageFormat;
 
 public enum MessagesEnum {
+	MONGODB_IS_DOWN("Mongo DB seems to be down. Please start the service and try again."),
 	ENTER_VALID_EMAIL("Invalid email address. Please enter valid email."),
 	ENTER_DELOITTE_EMAIL("Please enter your Deloitte email address."),
 	DUPLICATE_USER("User with same Email ID \"{0}\" already exists."),

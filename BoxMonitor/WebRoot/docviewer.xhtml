@@ -1,0 +1,22 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition template="./index.xhtml">
+		<ui:define name="content">
+			<p:panel id="guidepanel" header="Way To Find Box/Machine Thief">
+				<object type="application/pdf"
+					data="#{request.contextPath}/resources/docs/HowToFindUserWhohasInterrupted.pdf;jsessionid=11me602fepv9e1g1lj880n6qsh?pfdrid_c=true"
+					height="100%" width="100%" internalinstanceid="5">
+					Your browser can't display pdf, <a
+						href="#{request.contextPath}/resources/docs/HowToFindUserWhohasInterrupted.pdf;jsessionid=11me602fepv9e1g1lj880n6qsh">click</a>
+					to download pdf instead.
+				</object>
+			</p:panel>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

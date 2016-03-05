@@ -75,6 +75,9 @@ public class DataAccess {
 				throw new ApplicationException(MessagesEnum.DUPLICATE_USER.getMessage(userInfo.get(DBConstants.EMAIL)), e);
 			}
 		} catch (Exception e) {
+			if (e instanceof com.mongodb.MongoTimeoutException) {
+				throw new ApplicationException(MessagesEnum.MONGODB_IS_DOWN.getMessage(), e);
+			}
 			throw new ApplicationException(MessagesEnum.ADD_USER_FAILED.getMessage(), e);
 		}
 		return true;
@@ -94,6 +97,9 @@ public class DataAccess {
 				return users.get(0).getString(DBConstants.USER_NAME);
 			}
 		} catch (Exception e) {
+			if (e instanceof com.mongodb.MongoTimeoutException) {
+				throw new ApplicationException(MessagesEnum.MONGODB_IS_DOWN.getMessage(), e);
+			}
 			throw new ApplicationException(MessagesEnum.RETRIVAL_FAILED.getMessage(email), e);
 		}
 	}
@@ -112,6 +118,9 @@ public class DataAccess {
 				return boxes.get(0).getString(DBConstants.OWNER);
 			}
 		} catch (Exception e) {
+			if (e instanceof com.mongodb.MongoTimeoutException) {
+				throw new ApplicationException(MessagesEnum.MONGODB_IS_DOWN.getMessage(), e);
+			}
 			throw new ApplicationException(MessagesEnum.RETRIVAL_FAILED.getMessage(), e);
 		}
 	}
@@ -131,6 +140,9 @@ public class DataAccess {
 								bookingInfo.get(DBConstants.EMAIL)), e);
 			}
 		} catch (Exception e) {
+			if (e instanceof com.mongodb.MongoTimeoutException) {
+				throw new ApplicationException(MessagesEnum.MONGODB_IS_DOWN.getMessage(), e);
+			}
 			throw new ApplicationException(MessagesEnum.BOOKING_FAILED.getMessage(), e);
 		}
 		return true;
@@ -196,6 +208,9 @@ public class DataAccess {
 				Collections.sort(bkng.getUsersInQueue());
 			}
 		} catch (Exception e) {
+			if (e instanceof com.mongodb.MongoTimeoutException) {
+				throw new ApplicationException(MessagesEnum.MONGODB_IS_DOWN.getMessage(), e);
+			}
 			throw new ApplicationException(MessagesEnum.BOOKINGS_RETRIVAL_FAILED.getMessage(), e);
 		}
 		return bookings;
@@ -209,6 +224,9 @@ public class DataAccess {
 			booking.put(DBConstants.BOOKING_ID, bookingId);
 			coll.deleteOne(booking);
 		} catch (Exception e) {
+			if (e instanceof com.mongodb.MongoTimeoutException) {
+				throw new ApplicationException(MessagesEnum.MONGODB_IS_DOWN.getMessage(), e);
+			}
 			throw new ApplicationException(MessagesEnum.CLOSE_BOOKING_FAILED.getMessage(bookingId), e);
 		}
 		return true;
@@ -237,7 +255,9 @@ public class DataAccess {
 				users.add(user);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			if (e instanceof com.mongodb.MongoTimeoutException) {
+				throw new ApplicationException(MessagesEnum.MONGODB_IS_DOWN.getMessage(), e);
+			}
 			throw new ApplicationException(MessagesEnum.BOOKINGS_RETRIVAL_FAILED.getMessage(), e);
 		}
 		return users;
@@ -261,7 +281,9 @@ public class DataAccess {
 				user.setBookingId(document.getString(DBConstants.BOOKING_ID));
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			if (e instanceof com.mongodb.MongoTimeoutException) {
+				throw new ApplicationException(MessagesEnum.MONGODB_IS_DOWN.getMessage(), e);
+			}
 			throw new ApplicationException(MessagesEnum.BOOKINGS_RETRIVAL_FAILED.getMessage(), e);
 		}
 		return user;
@@ -291,7 +313,9 @@ public class DataAccess {
 			updateQuery.put("$set", updateSet);
 			coll.updateOne(filterQuery, updateQuery);
 		} catch (Exception e) {
-			e.printStackTrace();
+			if (e instanceof com.mongodb.MongoTimeoutException) {
+				throw new ApplicationException(MessagesEnum.MONGODB_IS_DOWN.getMessage(), e);
+			}
 			throw new ApplicationException(MessagesEnum.PASSING_BOOKING_FAILED.getMessage(), e);
 		}
 		return true;
@@ -304,6 +328,9 @@ public class DataAccess {
 			final Document emptyDoc = new Document();
 			coll.deleteMany(emptyDoc);
 		} catch (Exception e) {
+			if (e instanceof com.mongodb.MongoTimeoutException) {
+				throw new ApplicationException(MessagesEnum.MONGODB_IS_DOWN.getMessage(), e);
+			}
 			throw new ApplicationException(MessagesEnum.CLEAR_ALL_BOOKINGS_FAILED.getMessage(), e);
 		}
 	}
