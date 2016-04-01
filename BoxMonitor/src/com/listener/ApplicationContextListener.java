@@ -10,7 +10,7 @@ import javax.servlet.ServletContextListener;
 
 import com.exception.ApplicationException;
 import com.mongo.MongoDBConnManager;
-import com.scheduler.HTTPPostScheduler;
+import com.scheduler.LeftOverBookingsCloseScheduler;
 import com.util.PropertiesUtil;
 
 public class ApplicationContextListener implements ServletContextListener {
@@ -20,10 +20,10 @@ public class ApplicationContextListener implements ServletContextListener {
 		try {
 			// create the timer and timer task objects
 			Timer timer = new Timer();
-			HTTPPostScheduler task = new HTTPPostScheduler();
+			LeftOverBookingsCloseScheduler task = new LeftOverBookingsCloseScheduler();
 
 			Calendar today = Calendar.getInstance();
-			today.set(Calendar.HOUR_OF_DAY, 9);
+			today.set(Calendar.HOUR_OF_DAY, 22);
 			today.set(Calendar.MINUTE, 0);
 			today.set(Calendar.SECOND, 0);
 

@@ -101,9 +101,9 @@ public class BoxBooking extends BaseMBean {
 	}
 	
 	public List<Booking> getBookings() {
-		if (bookings == null) {
+		//if (bookings == null) {
 			bookings = new ArrayList<Booking>(DataAccess.getInstance().getAllBookings().values());
-		}
+		//}
 		return bookings;
 	}
 
