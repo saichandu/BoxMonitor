@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.constants.ApplicationConstants;
 import com.constants.EnumConstants;
 import com.dao.DataAccess;
 import com.exception.ApplicationException;
@@ -58,6 +59,11 @@ public class CloseBooking extends HttpServlet {
 				//update next user booking time inorder to calculate remaining time properly
 				DataAccess.getInstance().updateBooking(nextUserInQueue.getBookingId());
 				
+				//Delete other bookings of the same user if any
+				DataAccess.getInstance().removeOtherBookings(
+						nextUserInQueue.getEmail(),
+						nextUserInQueue.getBookingId());
+				
 				final String subject = MessagesEnum.SLOT_AVAILABLE_EMAIL_SUBJECT_TEMPLATE.getMessage(boxName);
 				final String body = MessagesEnum.SLOT_AVAILABLE_EMAIL_BODY_TEMPLATE
 									.getMessage(
@@ -67,7 +73,7 @@ public class CloseBooking extends HttpServlet {
 											"" + request.getServerPort() + "",
 											request.getContextPath().substring(1,
 													request.getContextPath().length()),
-											boxName, nextUserInQueue.getBookingId(), "saavvaru@deloitte.com");
+											boxName, nextUserInQueue.getBookingId(), ApplicationConstants.ADMIN_EMAIL);
 				
 				final Properties props = PropertiesUtil.getInstance().getDmailProps();
 				try {

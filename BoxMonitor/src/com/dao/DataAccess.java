@@ -7,7 +7,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 
 import com.constants.DBConstants;
 import com.exception.ApplicationException;
@@ -15,6 +17,7 @@ import com.exception.MessagesEnum;
 import com.mongo.MongoDBConnManager;
 import com.mongodb.Block;
 import com.mongodb.MongoWriteException;
+import com.mongodb.QueryBuilder;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -396,6 +399,34 @@ public class DataAccess {
 				throw new ApplicationException(MessagesEnum.MONGODB_IS_DOWN.getMessage(), e);
 			}
 			throw new ApplicationException(e);
+		}
+	}
+	
+	public void removeOtherBookings(String email, String bookingId) {
+		final List<String> extraBookings = new ArrayList<String>();
+		try {
+			final MongoDatabase mdb = MongoDBConnManager.getInstance().getConnection();
+			final MongoCollection<Document> coll = mdb.getCollection(DBConstants.COLL_BOOKING);
+			final Document findCr = new Document();
+			findCr.put(DBConstants.EMAIL, email);
+			final ArrayList<Document> lstBkngs = coll.find(findCr).into(new ArrayList<Document>());
+			
+			for (final Document document : lstBkngs) {
+				if (!StringUtils.equalsIgnoreCase(bookingId,
+						document.getString(DBConstants.BOOKING_ID))) {
+					extraBookings.add(document.getString(DBConstants.BOOKING_ID));
+				}
+			}
+			
+			QueryBuilder deleteQuery = new QueryBuilder();
+			deleteQuery.put(DBConstants.BOOKING_ID).in(extraBookings.toArray(new String[extraBookings.size()]));
+			coll.deleteMany((Bson)deleteQuery.get());
+		} catch (Exception e) {
+			e.printStackTrace();
+			if (e instanceof com.mongodb.MongoTimeoutException) {
+				throw new ApplicationException(MessagesEnum.MONGODB_IS_DOWN.getMessage(), e);
+			}
+			throw new ApplicationException(MessagesEnum.CLOSE_BOOKING_FAILED.getMessage(extraBookings.toString()), e);
 		}
 	}
 }

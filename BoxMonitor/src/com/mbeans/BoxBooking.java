@@ -195,7 +195,7 @@ public class BoxBooking extends BaseMBean {
 												ctxt.getRequestContextPath().length()),
 										bookingInfo.get(DBConstants.BOX_NAME),
 										bookingInfo.get(DBConstants.BOOKING_ID),
-										"saavvaru@deloitte.com");
+										ApplicationConstants.ADMIN_EMAIL);
 			
 			try {
 				EmailServiceImpl.getInstance().sendMail(props, email, subject, body);

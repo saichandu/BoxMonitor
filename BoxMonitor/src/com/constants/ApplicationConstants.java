@@ -9,4 +9,5 @@ public interface ApplicationConstants {
 	String CURRENT_BOOKED_BOX = "currentBookedBox";
 	String CURRENT_BOX_BOOKING = "currentBoxBooking";
 	String WHATS_NEW_FEATURE = "WHATS_NEW_FEATURE";
+	String ADMIN_EMAIL = "saavvaru@deloitte.com";
 }
