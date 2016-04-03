@@ -6,6 +6,7 @@ public interface DBConstants {
 	String COLL_BOXES = "boxes";
 	String COLL_USERS = "users";
 	String COLL_BOOKING = "booking";
+	String COLL_WHATSNEW = "whatsnew";
 	
 	//DB Users
 	String EMAIL = "email";
@@ -20,4 +21,8 @@ public interface DBConstants {
 	String DATE_N_TIME = "date_n_time";
 	String ESTIMATED_USAGE = "estimated_usage";
 	String BOOKING_ID = "booking_id";
+	
+	//DB whatsnew
+	String READ = "read";
+	String HOST_NAME = "host_name";
 }

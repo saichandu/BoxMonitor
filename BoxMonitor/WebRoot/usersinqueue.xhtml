@@ -33,6 +33,24 @@
 					    </p:column>
 					</p:dataTable>
 				</p:panel>
+				
+				<p:dialog header="What's New" widgetVar="whatsnew" modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+					width="700px" closeOnEscape="false" position="center middle" closable="false" visible="#{boxbookingmb.whatsnewdlgvisible}">
+		            <h:panelGroup>
+		                <f:verbatim><br/></f:verbatim>
+		            	<p:fieldset legend="Booking Slot AutoClose" style="margin-bottom:20px;" toggleable="false">
+					        <h:panelGrid columns="1" cellpadding="5">
+					            <h:outputText
+					                value="Hi, Hope you are doing good.&lt;br/&gt;&lt;br/&gt;
+					                This is to inform you that applicaton has been enchanced to auto close the booking after
+					                the specified time that has been registered against a box is elapsed." escape="false"/>
+					        </h:panelGrid>
+					    </p:fieldset>
+		            </h:panelGroup>
+		            <f:verbatim><br/><br/></f:verbatim>
+		            <p:commandButton value="I Have Read" onclick="PF('whatsnew').hide()" actionListener="#{boxbookingmb.whatsnewread}"/>
+		            <f:verbatim><br/></f:verbatim>
+			    </p:dialog>
 			</h:form>
 		</ui:define>
 	</ui:composition>

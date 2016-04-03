@@ -18,7 +18,7 @@ public class User implements Comparable<User>, Serializable{
 	private String time;
 	private String bookingId;
 	private int estimatedUsage;
-	//private int remainingTime;
+	private int remainingTime;
 	
 	public User() {}
 	
@@ -64,11 +64,11 @@ public class User implements Comparable<User>, Serializable{
 		this.estimatedUsage = estimatedUsage;
 	}
 
-	/*public int getRemainingTime() {
+	public int getRemainingTime() {
 		this.remainingTime = estimatedUsage - (int)((new Date().getTime() - this.getDateNTime().getTime())/MILLI_TO_MINS);
 		this.remainingTime = this.remainingTime < 0 ? 0 : remainingTime;
 		return remainingTime;
-	}*/
+	}
 
 	public void setUserName(String userName) {
 		this.userName = userName;

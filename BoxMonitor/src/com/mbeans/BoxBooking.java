@@ -8,11 +8,12 @@ import java.util.Map;
 import java.util.Properties;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.faces.model.SelectItemGroup;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -26,7 +27,7 @@ import com.util.PropertiesUtil;
 import com.vo.Booking;
 import com.vo.User;
 
-@ViewScoped
+@RequestScoped
 @ManagedBean(name="boxbookingmb")
 public class BoxBooking extends BaseMBean {
 	
@@ -38,6 +39,15 @@ public class BoxBooking extends BaseMBean {
 	private List<SelectItem> boxes = new ArrayList<SelectItem>();
 	private List<Booking> bookings;
 	private Booking selectedRow;
+	private boolean whatsnewdlgvisible = false;
+
+	public boolean isWhatsnewdlgvisible() {
+		return whatsnewdlgvisible;
+	}
+
+	public void setWhatsnewdlgvisible(boolean whatsnewdlgvisible) {
+		this.whatsnewdlgvisible = whatsnewdlgvisible;
+	}
 
 	public String getEmail() {
 		return email;
@@ -118,7 +128,7 @@ public class BoxBooking extends BaseMBean {
 	public void setSelectedRow(Booking selectedRow) {
 		this.selectedRow = selectedRow;
 	}
-
+	
 	public String book() {
 		if (!super.validateEmail(email)) {
 			return null;
@@ -189,11 +199,26 @@ public class BoxBooking extends BaseMBean {
 			try {
 				EmailServiceImpl.getInstance().sendMail(props, email, subject, body);
 			} catch (Exception e) {
-				
 				throw new ApplicationException(MessagesEnum.EMAIL_SENDING_FAILED.getMessage(email));
+			}
+			
+			//What's New Notification
+			String whatsnewfeature = (String) PropertiesUtil.getInstance().getProps().get(ApplicationConstants.WHATS_NEW_FEATURE);
+			if (StringUtils.endsWithIgnoreCase(whatsnewfeature, "on")) {
+				String hostname = ((HttpServletRequest) context.getExternalContext()
+						.getRequest()).getRemoteHost();
+				if (!DataAccess.getInstance().hasWhatsNewsBeenRead(hostname)) {
+					setWhatsnewdlgvisible(true);
+				}
 			}
 		}
 		
 		return "usersinqueue";
+	}
+	
+	public void whatsnewread() {
+		String hostname = ((HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
+				.getRequest()).getRemoteHost();
+		DataAccess.getInstance().whatsNewsIsRead(hostname);
 	}
 }

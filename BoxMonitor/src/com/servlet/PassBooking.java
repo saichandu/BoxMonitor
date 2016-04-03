@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.constants.EnumConstants;
 import com.dao.DataAccess;
 import com.exception.ApplicationException;
 import com.exception.MessagesEnum;
@@ -53,9 +54,9 @@ public class PassBooking extends HttpServlet {
 				nextUserInQueue = usersInQueue.get(index + 1);
 				result = DataAccess.getInstance().passBooking(currentUserBooking, nextUserInQueue);
 				if (result) {
-					out.println("Success.");
+					out.println(EnumConstants.SUCCESS.toString());
 				} else {
-					out.println("Failed.");
+					out.println(EnumConstants.FAILED.toString());
 					return;
 				}
 			}
@@ -80,7 +81,7 @@ public class PassBooking extends HttpServlet {
 				}
 			}
 		} catch (ApplicationException e){
-			out.println("Failed. " + e.getMessage());
+			out.println(e.getMessage());
 		}
 	}
 }

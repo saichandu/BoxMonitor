@@ -1,8 +1,6 @@
 package com.listener;
 
-import java.util.Calendar;
 import java.util.Timer;
-import java.util.concurrent.TimeUnit;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -10,7 +8,7 @@ import javax.servlet.ServletContextListener;
 
 import com.exception.ApplicationException;
 import com.mongo.MongoDBConnManager;
-import com.scheduler.LeftOverBookingsCloseScheduler;
+import com.scheduler.TimeKeeper;
 import com.util.PropertiesUtil;
 
 public class ApplicationContextListener implements ServletContextListener {
@@ -19,8 +17,9 @@ public class ApplicationContextListener implements ServletContextListener {
 		ServletContext servletContext = servletContextEvent.getServletContext();
 		try {
 			// create the timer and timer task objects
-			Timer timer = new Timer();
-			LeftOverBookingsCloseScheduler task = new LeftOverBookingsCloseScheduler();
+			Timer timer = new Timer(true);
+			
+			/*LeftOverBookingsCloseScheduler task = new LeftOverBookingsCloseScheduler();
 
 			Calendar today = Calendar.getInstance();
 			today.set(Calendar.HOUR_OF_DAY, 22);
@@ -30,10 +29,15 @@ public class ApplicationContextListener implements ServletContextListener {
 			// schedule the task
 			timer.schedule(task, today.getTime(),
 					TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS)); // 60*60*24*100 = 8640000ms
-
+			*/
+			
+			//Start the timekeeper
+			TimeKeeper tkTask = new TimeKeeper("localhost", "9085", servletContext.getContextPath());
+			timer.scheduleAtFixedRate(tkTask, 0, 5*60*1000);
+			
 			// save the timer in context
 			servletContext.setAttribute("timer", timer);
-
+			
 		} catch (Exception e) {
 			throw new ApplicationException("Problem initializing the scheduled task: ", e);
 		}

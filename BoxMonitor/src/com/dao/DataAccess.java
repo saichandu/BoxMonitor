@@ -334,4 +334,45 @@ public class DataAccess {
 			throw new ApplicationException(MessagesEnum.CLEAR_ALL_BOOKINGS_FAILED.getMessage(), e);
 		}
 	}
+	
+	public boolean hasWhatsNewsBeenRead(String hostname) {
+		try {
+			final MongoDatabase mdb = MongoDBConnManager.getInstance().getConnection();
+			final MongoCollection<Document> coll = mdb.getCollection(DBConstants.COLL_WHATSNEW);
+			final Document bson = new Document();
+			bson.put(DBConstants.HOST_NAME, hostname);
+			final List<Document> documents = coll.find(bson).into(new ArrayList<Document>());
+			if (documents == null || (documents != null && documents.size() == 0)) {
+				return false;
+			} else {
+				//'0' index is accessed because hostname is uniquely maintained at DB level
+				return documents.get(0).getString(DBConstants.READ) != null;
+			}
+		} catch (Exception e) {
+			if (e instanceof com.mongodb.MongoTimeoutException) {
+				throw new ApplicationException(MessagesEnum.MONGODB_IS_DOWN.getMessage(), e);
+			}
+			throw new ApplicationException(e);
+		}
+	}
+	
+	public void whatsNewsIsRead(String hostname) {
+		try {
+			final MongoDatabase mdb = MongoDBConnManager.getInstance().getConnection();
+			final MongoCollection<Document> coll = mdb.getCollection(DBConstants.COLL_WHATSNEW);
+			final Document document = new Document();
+			document.put(DBConstants.HOST_NAME, hostname);
+			document.put(DBConstants.READ, "Y");
+			coll.insertOne(document);
+		} catch (MongoWriteException e) {
+			if (e.getCode() == 11000) {
+				throw new ApplicationException(e);
+			}
+		} catch (Exception e) {
+			if (e instanceof com.mongodb.MongoTimeoutException) {
+				throw new ApplicationException(MessagesEnum.MONGODB_IS_DOWN.getMessage(), e);
+			}
+			throw new ApplicationException(e);
+		}
+	}
 }

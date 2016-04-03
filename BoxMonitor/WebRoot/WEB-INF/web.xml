@@ -37,6 +37,11 @@
     <servlet-name>PassBooking</servlet-name>
     <servlet-class>com.servlet.PassBooking</servlet-class>
   </servlet>
+  
+  <error-page>
+    <exception-type>javax.faces.application.ViewExpiredException</exception-type>
+    <location>/index.xhtml</location>
+  </error-page>
 
 
   <servlet-mapping>

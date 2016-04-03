@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.constants.EnumConstants;
 import com.dao.DataAccess;
 import com.exception.ApplicationException;
 import com.exception.MessagesEnum;
@@ -35,9 +36,10 @@ public class CloseBooking extends HttpServlet {
 			final User booking  = DataAccess.getInstance().getBooking(bookingId);
 			result = DataAccess.getInstance().closeBooking(bookingId);
 			if (result) {
-				out.println("Success.");
+				response.setStatus(200);
+				out.println(EnumConstants.SUCCESS.toString());
 			} else {
-				out.println("Failed.");
+				out.println(EnumConstants.FAILED.toString());
 				return;
 			}
 			
@@ -72,7 +74,7 @@ public class CloseBooking extends HttpServlet {
 				}
 			}
 		} catch (ApplicationException e){
-			out.println("Failed. " + e.getMessage());
+			out.println(e.getMessage());
 		}
 	}
 }

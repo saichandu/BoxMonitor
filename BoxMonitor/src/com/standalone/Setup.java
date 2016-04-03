@@ -51,4 +51,6 @@ public class Setup {
 	//mongoexport --db boxmonitor --collection users --out users_bkp.json
 	//mongodump --db boxmonitor
 	//mongorestore C:\Users\saavvaru\Documents\Softwares\MongoDB-3.2.1\bin\mongodump_3rdMarch2016\
+	//db.createCollection('whatsnew');
+	//db.whatsnew.createIndex({"host_name":1}, {unique:true});
 }

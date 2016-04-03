@@ -8,4 +8,5 @@ public interface ApplicationConstants {
 	String BOOKINGS_MAP = "bookingsMap";
 	String CURRENT_BOOKED_BOX = "currentBookedBox";
 	String CURRENT_BOX_BOOKING = "currentBoxBooking";
+	String WHATS_NEW_FEATURE = "WHATS_NEW_FEATURE";
 }

@@ -3,6 +3,7 @@ package com.exception;
 import java.text.MessageFormat;
 
 public enum MessagesEnum {
+	
 	MONGODB_IS_DOWN("Mongo DB seems to be down. Please start the service and try again."),
 	ENTER_VALID_EMAIL("Invalid email address. Please enter valid email."),
 	ENTER_DELOITTE_EMAIL("Please enter your Deloitte email address."),
@@ -22,6 +23,7 @@ public enum MessagesEnum {
 	EMAIL_SENDING_FAILED("Failed to send booking email to \"{0}\". Please contact administrator."),
 	GENERIC_ERROR("We are temporarily unable to process your request. Please try again later."),
 	APP_PROPERTIES_LOADING_FAILED("Failed to load application properties."),
+	FAILED_TO_INVOKE_SERVICE("Failed to invoke \"{0}\" service"),
 	
 	BOOKING_EMAIL_SUBJECT_TEMPLATE("AUTO GENERATED: Booking for Box/Machine {0}"),
 	BOOKING_EMAIL_BODY_TEMPLATE("This is auto generated email for box/machine booking. DO NOT REPLY.<br/><br/>"

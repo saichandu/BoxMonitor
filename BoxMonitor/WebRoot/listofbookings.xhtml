@@ -63,16 +63,16 @@
 						        <h:outputText value="#{queuedUser.teamName}" />
 						    </p:column>
 						    
-						    <!-- <p:column headerText="Remaining Time of Usage (in mins)" style="text-align:center">
-						        <h:outputText value="#{queuedUser.remainingTime}" />
-						    </p:column> -->
-						    <p:column headerText="Estimated Usage Time (in mins)" style="text-align:center">
-						        <h:outputText value="#{queuedUser.estimatedUsage}" />
+						    <p:column headerText="Remaining Time of Usage (in mins)" style="text-align:center">
+						        <h:outputText value="#{queuedUser.remainingTime}" 
+						        	rendered="#{boxbookingmb.selectedRow.currentUser.userName == queuedUser.userName}"/>
+						        <h:outputText value="NA" 
+						        	rendered="#{boxbookingmb.selectedRow.currentUser.userName != queuedUser.userName}"/>
 						    </p:column>
 						    
-						    <p:column headerText="Booked Time" style="text-align:center">
+						    <!-- <p:column headerText="Booked Time" style="text-align:center">
 						        <h:outputText value="#{queuedUser.time}"/>
-						    </p:column>
+						    </p:column> -->
 						</p:dataTable>
 						<!-- <f:verbatim><br/></f:verbatim>
 						<p:outputLabel value="Note: The rows which are hightlighted in Red color are timed out."/> -->
