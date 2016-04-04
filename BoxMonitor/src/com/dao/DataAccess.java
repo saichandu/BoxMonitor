@@ -190,6 +190,7 @@ public class DataAccess {
 								List.class).get(0))
 								.getString(DBConstants.TEAM_NAME));
 				user.setBookedDateNTime(document.getDate(DBConstants.BOOKED_DATE_N_TIME));
+				user.setDateNTime(document.getDate(DBConstants.DATE_N_TIME));
 				user.setEstimatedUsage(document.getInteger(DBConstants.ESTIMATED_USAGE));
 				user.setBookingId(document.getString(DBConstants.BOOKING_ID));
 				if (!bookings.containsKey(document.getString(DBConstants.BOX_NAME))) {
@@ -252,6 +253,7 @@ public class DataAccess {
 				final User user = new User();
 				user.setEmail(document.getString(DBConstants.EMAIL));
 				user.setBookedDateNTime(document.getDate(DBConstants.BOOKED_DATE_N_TIME));
+				user.setDateNTime(document.getDate(DBConstants.DATE_N_TIME));
 				user.setBookingId(document.getString(DBConstants.BOOKING_ID));
 				users.add(user);
 			}

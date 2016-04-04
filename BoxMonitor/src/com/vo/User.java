@@ -53,6 +53,10 @@ public class User implements Comparable<User>, Serializable{
 		this.bookedDateNTime = bookedDateNTime;
 	}
 
+	public void setDateNTime(Date dateNTime) {
+		this.dateNTime = dateNTime;
+	}
+
 	public Date getDateNTime() {
 		return dateNTime;
 	}
