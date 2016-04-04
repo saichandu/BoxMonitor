@@ -143,6 +143,7 @@ public class BoxBooking extends BaseMBean {
 		final Map<String, Object> bookingInfo = new LinkedHashMap<String, Object>();
 		bookingInfo.put(DBConstants.EMAIL, email);
 		bookingInfo.put(DBConstants.BOX_NAME, boxselected);
+		bookingInfo.put(DBConstants.BOOKED_DATE_N_TIME, new Date());
 		bookingInfo.put(DBConstants.DATE_N_TIME, new Date());
 		bookingInfo.put(DBConstants.ESTIMATED_USAGE, estimatedUsage);
 		bookingInfo.put(DBConstants.BOOKING_ID, "" + System.currentTimeMillis() + "");

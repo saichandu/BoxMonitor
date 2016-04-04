@@ -19,6 +19,7 @@ public interface DBConstants {
 	
 	//DB booking
 	String DATE_N_TIME = "date_n_time";
+	String BOOKED_DATE_N_TIME = "booked_date_n_time";
 	String ESTIMATED_USAGE = "estimated_usage";
 	String BOOKING_ID = "booking_id";
 	

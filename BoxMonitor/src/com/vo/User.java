@@ -14,6 +14,7 @@ public class User implements Comparable<User>, Serializable{
 	private String email;
 	private String teamName;
 	private boolean highlight;
+	private Date bookedDateNTime;
 	private Date dateNTime;
 	private String time;
 	private String bookingId;
@@ -42,6 +43,14 @@ public class User implements Comparable<User>, Serializable{
 
 	public void setHighlight(boolean highlight) {
 		this.highlight = highlight;
+	}
+
+	public Date getBookedDateNTime() {
+		return bookedDateNTime;
+	}
+	
+	public void setBookedDateNTime(Date bookedDateNTime) {
+		this.bookedDateNTime = bookedDateNTime;
 	}
 
 	public Date getDateNTime() {
@@ -78,10 +87,6 @@ public class User implements Comparable<User>, Serializable{
 		this.teamName = teamName;
 	}
 
-	public void setDateNTime(Date dateNTime) {
-		this.dateNTime = dateNTime;
-	}
-
 	public void setTime(String time) {
 		this.time = time;
 	}
@@ -94,7 +99,7 @@ public class User implements Comparable<User>, Serializable{
 
 	@Override
 	public int compareTo(User obj) {
-		if (obj != null && obj.getDateNTime().before(this.getDateNTime())) {
+		if (obj != null && obj.getBookedDateNTime().before(this.getBookedDateNTime())) {
 			return 1;
 		}
 		return -1;

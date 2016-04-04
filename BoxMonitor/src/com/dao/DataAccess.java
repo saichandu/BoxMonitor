@@ -2,6 +2,7 @@ package com.dao;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -188,7 +189,7 @@ public class DataAccess {
 				user.setTeamName(((Document) document.get("join_for_username",
 								List.class).get(0))
 								.getString(DBConstants.TEAM_NAME));
-				user.setDateNTime(document.getDate(DBConstants.DATE_N_TIME));
+				user.setBookedDateNTime(document.getDate(DBConstants.BOOKED_DATE_N_TIME));
 				user.setEstimatedUsage(document.getInteger(DBConstants.ESTIMATED_USAGE));
 				user.setBookingId(document.getString(DBConstants.BOOKING_ID));
 				if (!bookings.containsKey(document.getString(DBConstants.BOX_NAME))) {
@@ -244,13 +245,13 @@ public class DataAccess {
 			final Document findCr = new Document();
 			findCr.put(DBConstants.BOX_NAME, boxName);
 			final Document sortCr = new Document();
-			sortCr.put(DBConstants.DATE_N_TIME, 1);
+			sortCr.put(DBConstants.BOOKED_DATE_N_TIME, 1);
 			final ArrayList<Document> lstBkngs = coll.find(findCr).sort(sortCr).into(new ArrayList<Document>());
 			
 			for (final Document document : lstBkngs) {
 				final User user = new User();
 				user.setEmail(document.getString(DBConstants.EMAIL));
-				user.setDateNTime(document.getDate(DBConstants.DATE_N_TIME));
+				user.setBookedDateNTime(document.getDate(DBConstants.BOOKED_DATE_N_TIME));
 				user.setBookingId(document.getString(DBConstants.BOOKING_ID));
 				users.add(user);
 			}
@@ -288,7 +289,27 @@ public class DataAccess {
 		}
 		return user;
 	}
-
+	
+	public void updateBooking(String bookingId) {
+		try {
+			final MongoDatabase mdb = MongoDBConnManager.getInstance().getConnection();
+			final MongoCollection<Document> coll = mdb.getCollection(DBConstants.COLL_BOOKING);
+			//update user booking time
+			final Document filterQuery = new Document();
+			filterQuery.put(DBConstants.BOOKING_ID, bookingId);
+			final Document updateQuery = new Document();
+			final Document updateSet = new Document();	
+			updateSet.put(DBConstants.DATE_N_TIME, new Date());
+			updateQuery.put("$set", updateSet);
+			coll.updateOne(filterQuery, updateQuery);
+		} catch (Exception e) {
+			if (e instanceof com.mongodb.MongoTimeoutException) {
+				throw new ApplicationException(MessagesEnum.MONGODB_IS_DOWN.getMessage(), e);
+			}
+			throw new ApplicationException(MessagesEnum.UPDATE_USER_FAILED.getMessage(), e);
+		}
+	}
+	
 	@SuppressWarnings("deprecation")
 	public boolean passBooking(User currentUserBooking, User nextUserInQueue) {
 		try {
@@ -299,9 +320,9 @@ public class DataAccess {
 			final ArrayList<Document> lstBkngs = coll.find(findCr).into(new ArrayList<Document>());
 			
 			for (final Document document : lstBkngs) {
-				java.util.Date nextUserBookingTime = document.getDate(DBConstants.DATE_N_TIME);
+				java.util.Date nextUserBookingTime = document.getDate(DBConstants.BOOKED_DATE_N_TIME);
 				nextUserBookingTime.setSeconds(nextUserBookingTime.getSeconds() + 1);
-				currentUserBooking.setDateNTime(nextUserBookingTime);
+				currentUserBooking.setBookedDateNTime(nextUserBookingTime);
 			}
 			
 			//update current user booking time
@@ -309,7 +330,7 @@ public class DataAccess {
 			filterQuery.put(DBConstants.BOOKING_ID, currentUserBooking.getBookingId());
 			final Document updateQuery = new Document();
 			final Document updateSet = new Document();	
-			updateSet.put(DBConstants.DATE_N_TIME, currentUserBooking.getDateNTime());
+			updateSet.put(DBConstants.BOOKED_DATE_N_TIME, currentUserBooking.getBookedDateNTime());
 			updateQuery.put("$set", updateSet);
 			coll.updateOne(filterQuery, updateQuery);
 		} catch (Exception e) {

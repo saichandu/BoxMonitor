@@ -55,6 +55,9 @@ public class CloseBooking extends HttpServlet {
 				nextUserInQueue = usersInQueue.get(1);
 			}
 			if (nextUserInQueue != null) {
+				//update next user booking time inorder to calculate remaining time properly
+				DataAccess.getInstance().updateBooking(nextUserInQueue.getBookingId());
+				
 				final String subject = MessagesEnum.SLOT_AVAILABLE_EMAIL_SUBJECT_TEMPLATE.getMessage(boxName);
 				final String body = MessagesEnum.SLOT_AVAILABLE_EMAIL_BODY_TEMPLATE
 									.getMessage(
