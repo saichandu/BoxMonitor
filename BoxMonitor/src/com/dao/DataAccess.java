@@ -402,7 +402,7 @@ public class DataAccess {
 		}
 	}
 	
-	public void removeOtherBookings(String email, String bookingId) {
+	public void removeOtherBookingsIfAny(String email, String bookingId) {
 		final List<String> extraBookings = new ArrayList<String>();
 		try {
 			final MongoDatabase mdb = MongoDBConnManager.getInstance().getConnection();
@@ -418,9 +418,11 @@ public class DataAccess {
 				}
 			}
 			
-			QueryBuilder deleteQuery = new QueryBuilder();
-			deleteQuery.put(DBConstants.BOOKING_ID).in(extraBookings.toArray(new String[extraBookings.size()]));
-			coll.deleteMany((Bson)deleteQuery.get());
+			if (!extraBookings.isEmpty()) {
+				QueryBuilder deleteQuery = new QueryBuilder();
+				deleteQuery.put(DBConstants.BOOKING_ID).in(extraBookings.toArray(new String[extraBookings.size()]));
+				coll.deleteMany((Bson)deleteQuery.get());
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			if (e instanceof com.mongodb.MongoTimeoutException) {

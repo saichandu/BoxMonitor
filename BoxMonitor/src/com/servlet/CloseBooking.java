@@ -60,7 +60,7 @@ public class CloseBooking extends HttpServlet {
 				DataAccess.getInstance().updateBooking(nextUserInQueue.getBookingId());
 				
 				//Delete other bookings of the same user if any
-				DataAccess.getInstance().removeOtherBookings(
+				DataAccess.getInstance().removeOtherBookingsIfAny(
 						nextUserInQueue.getEmail(),
 						nextUserInQueue.getBookingId());
 				
