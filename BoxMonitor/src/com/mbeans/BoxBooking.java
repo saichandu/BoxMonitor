@@ -148,6 +148,10 @@ public class BoxBooking extends BaseMBean {
 		bookingInfo.put(DBConstants.ESTIMATED_USAGE, estimatedUsage);
 		bookingInfo.put(DBConstants.BOOKING_ID, "" + System.currentTimeMillis() + "");
 		
+		if (estimatedUsage >= 120 || estimatedUsage == 0) {
+			throw new ApplicationException(MessagesEnum.INVALID_USAGE_PARAMS.getMessage());
+		}
+		
 		final boolean status = DataAccess.getInstance().saveBooking(bookingInfo);
 		
 		if (status) {

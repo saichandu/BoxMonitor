@@ -11,7 +11,7 @@ public enum MessagesEnum {
 	ADD_USER_SUCCESS("User \"{0}\" has been added successfully."),
 	ADD_USER_FAILED("Failed to add the user."),
 	UPDATE_USER_FAILED("Failed to update the user."),
-	USER_DOES_NOT_EXISTS("User with \"{0}\" email does not exists. Please use registered email for booking"),
+	USER_DOES_NOT_EXISTS("User with \"{0}\" email does not exists. Please use registered email for booking."),
 	RETRIVAL_FAILED("Failed to retrive the information."),
 	BOOKING_SUCCESS("The Machine/Box \"{0}\" has been booked successfully."),
 	BOOKING_FAILED("Failed to book the machine/box. Please try again later."),
@@ -25,6 +25,7 @@ public enum MessagesEnum {
 	GENERIC_ERROR("We are temporarily unable to process your request. Please try again later."),
 	APP_PROPERTIES_LOADING_FAILED("Failed to load application properties."),
 	FAILED_TO_INVOKE_SERVICE("Failed to invoke \"{0}\" service"),
+	INVALID_USAGE_PARAMS("Estimated usage should be greater than 0 and less than 120."),
 	
 	BOOKING_EMAIL_SUBJECT_TEMPLATE("AUTO GENERATED: Booking for Box/Machine {0}"),
 	BOOKING_EMAIL_BODY_TEMPLATE("This is auto generated email for box/machine booking. DO NOT REPLY.<br/><br/>"
