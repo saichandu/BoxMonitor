@@ -21,6 +21,7 @@ import com.mongodb.QueryBuilder;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.result.DeleteResult;
 import com.vo.Booking;
 import com.vo.User;
 
@@ -227,14 +228,20 @@ public class DataAccess {
 			final MongoCollection<Document> coll = mdb.getCollection(DBConstants.COLL_BOOKING);
 			final Document booking = new Document();
 			booking.put(DBConstants.BOOKING_ID, bookingId);
-			coll.deleteOne(booking);
+			System.out.println("closeBooking() " + bookingId);
+			DeleteResult rslt = coll.deleteOne(booking);
+			long deleteCount = rslt.getDeletedCount();
+			System.out.println("deletecount " + deleteCount);
+			if (deleteCount > 0L) {
+				return true;
+			}
 		} catch (Exception e) {
 			if (e instanceof com.mongodb.MongoTimeoutException) {
 				throw new ApplicationException(MessagesEnum.MONGODB_IS_DOWN.getMessage(), e);
 			}
 			throw new ApplicationException(MessagesEnum.CLOSE_BOOKING_FAILED.getMessage(bookingId), e);
 		}
-		return true;
+		return false;
 	}
 	
 	public List<User> getAllBookings(final String boxName) {

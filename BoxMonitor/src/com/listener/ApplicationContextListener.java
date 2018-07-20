@@ -39,6 +39,8 @@ public class ApplicationContextListener implements ServletContextListener {
 			// save the timer in context
 			servletContext.setAttribute("timer", timer);
 			
+			System.out.println("Timer created");
+			
 		} catch (Exception e) {
 			throw new ApplicationException("Problem initializing the scheduled task: ", e);
 		}

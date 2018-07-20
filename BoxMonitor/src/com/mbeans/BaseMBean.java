@@ -130,8 +130,8 @@ public class BaseMBean implements Serializable{
 				try {
 					String domain = StringUtils.substring(email, email.lastIndexOf(".") + 1, email.length());
 					String companyName = StringUtils.substring(email, email.lastIndexOf("@") + 1, email.lastIndexOf("."));
-					if (!StringUtils.equalsIgnoreCase(companyName, "deloitte") || !StringUtils.equalsIgnoreCase(domain, "com")) {
-						addErrorMessage(MessagesEnum.ENTER_DELOITTE_EMAIL.getMessage());
+					if (!StringUtils.endsWith(companyName, "itte") || !StringUtils.equalsIgnoreCase(domain, "com")) {
+						addErrorMessage(MessagesEnum.ENTER_OFFICE_EMAIL.getMessage());
 						return false;
 					}				
 				} catch (Exception e) {

@@ -34,6 +34,7 @@ public class TimeKeeper extends TimerTask {
 		try {
 			final List<Booking> bookings = new ArrayList<Booking>(DataAccess
 					.getInstance().getAllBookings().values());
+			System.out.println("TimeKeeper " + bookings.size());
 			for (Booking booking : bookings) {
 				User currUserInQueue = booking.getCurrentUser();
 				bookingId = currUserInQueue.getBookingId();

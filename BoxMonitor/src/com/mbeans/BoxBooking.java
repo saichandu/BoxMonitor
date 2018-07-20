@@ -148,7 +148,7 @@ public class BoxBooking extends BaseMBean {
 		bookingInfo.put(DBConstants.ESTIMATED_USAGE, estimatedUsage);
 		bookingInfo.put(DBConstants.BOOKING_ID, "" + System.currentTimeMillis() + "");
 		
-		if (estimatedUsage >= 120 || estimatedUsage == 0) {
+		if (estimatedUsage >= 120 || estimatedUsage <= 0) {
 			throw new ApplicationException(MessagesEnum.INVALID_USAGE_PARAMS.getMessage());
 		}
 		
@@ -178,13 +178,6 @@ public class BoxBooking extends BaseMBean {
 			
 			super.addInfoMessage(MessagesEnum.BOOKING_SUCCESS.getMessage(
 					bookingInfo.get(DBConstants.BOX_NAME)));
-			
-			//send booking email
-			/*Properties props = System.getProperties();
-			props.setProperty("mail.transport.protocol", "smtp");
-			props.setProperty("mail.host", "10.118.23.1");
-			props.setProperty("mail.smtp.port", "25");
-			props.setProperty("mail.smtp.user", "donotreply@deloitte.com");*/
 			
 			final Properties props = PropertiesUtil.getInstance().getDmailProps();
 			

@@ -4,7 +4,8 @@
   <JSFFlowResource path="/registration.xhtml" location="180,30" dimension="166,36" />
   <JSFFlowResource path="/boxbooking.xhtml" location="480,30" dimension="170,36" />
   <JSFFlowResource path="/listofbookings.xhtml" location="30,130" dimension="184,36" />
-  <JSFFlowResource path="/usersinqueue.xhtml" location="330,130" dimension="176,36" />
+  <JSFFlowResource path="/*" location="30,230" dimension="56,36" />
+  <JSFFlowResource path="/docviewer.xhtml" location="330,130" dimension="158,36" />
   <JSFFlowNavigationCase id="/registration.xhtml,/boxbooking.xhtml,boxbooking,&lt;empty&gt;" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="263,30" />
@@ -21,10 +22,11 @@
       <AbsolutePoint location="122,130" />
     </AutomaticBendpoints>
   </JSFFlowNavigationCase>
-  <JSFFlowNavigationCase id="/boxbooking.xhtml,/usersinqueue.xhtml,usersinqueue,&lt;empty&gt;" routingType="0">
+  <JSFFlowNavigationCase id="/*,/docviewer.xhtml,guide,&lt;empty&gt;" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="498,66" />
-      <AbsolutePoint location="498,130" />
+      <AbsolutePoint location="86,248" />
+      <AbsolutePoint location="409,248" />
+      <AbsolutePoint location="409,166" />
     </AutomaticBendpoints>
   </JSFFlowNavigationCase>
 </JSFFlowViewLayout>

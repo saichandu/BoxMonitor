@@ -11,25 +11,123 @@
   location="C:\Program Files (x86)\MyEclipse Blue Edition\Common\plugins\com.genuitec.eclipse.j2eedt.core_10.5.0.me201207171805\data\libraryset\EE_6\jsf-api.jar" model-entity="FileSystemJar"/>
  <file-system NAME="lib-jsf-impl.jar"
   location="C:\Program Files (x86)\MyEclipse Blue Edition\Common\plugins\com.genuitec.eclipse.j2eedt.core_10.5.0.me201207171805\data\libraryset\EE_6\jsf-impl.jar" model-entity="FileSystemJar"/>
- <file-system NAME="lib-all-themes-1.0.8.jar"
-  location="C:\Projects\BoxMonitor\WebRoot\WEB-INF\lib\all-themes-1.0.8.jar" model-entity="FileSystemJar"/>
- <file-system NAME="lib-mongodb-driver-3.2.1.jar"
-  location="C:\Projects\BoxMonitor\WebRoot\WEB-INF\lib\mongodb-driver-3.2.1.jar" model-entity="FileSystemJar"/>
- <file-system NAME="lib-primefaces-5.2.jar"
-  location="C:\Projects\BoxMonitor\WebRoot\WEB-INF\lib\primefaces-5.2.jar" model-entity="FileSystemJar"/>
- <file-system NAME="lib-commons-lang-2.6.jar"
-  location="C:\Projects\BoxMonitor\WebRoot\WEB-INF\lib\commons-lang-2.6.jar" model-entity="FileSystemJar"/>
  <file-system NAME="lib-javaee.jar"
   location="C:\Program Files (x86)\MyEclipse Blue Edition\Common\plugins\com.genuitec.eclipse.j2eedt.core_10.5.0.me201207171805\data\libraryset\EE_5\javaee.jar" model-entity="FileSystemJar"/>
  <file-system NAME="lib-jstl-1.2.jar"
   location="C:\Program Files (x86)\MyEclipse Blue Edition\Common\plugins\com.genuitec.eclipse.j2eedt.core_10.5.0.me201207171805\data\libraryset\EE_5\jstl-1.2.jar" model-entity="FileSystemJar"/>
- <file-system NAME="lib-bson-3.2.1.jar"
-  location="C:\Projects\BoxMonitor\WebRoot\WEB-INF\lib\bson-3.2.1.jar" model-entity="FileSystemJar"/>
- <file-system NAME="lib-mongodb-driver-core-3.2.1.jar"
-  location="C:\Projects\BoxMonitor\WebRoot\WEB-INF\lib\mongodb-driver-core-3.2.1.jar" model-entity="FileSystemJar"/>
  <file-system NAME="BoxMonitor" location="%eclipse.project%" model-entity="FileSystemFolder"/>
+ <file-system NAME="lib-vm.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\bin\compressedrefs\jclSC170\vm.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-se-service.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\se-service.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-math.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\math.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-jlm.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\jlm.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-ibmorb.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\ibmorb.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-ibmorbapi.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\ibmorbapi.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-ibmcfw.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\ibmcfw.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-ibmpkcs.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\ibmpkcs.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-ibmcertpathfw.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\ibmcertpathfw.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-ibmjgssfw.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\ibmjgssfw.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-ibmjssefw.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\ibmjssefw.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-ibmsaslfw.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\ibmsaslfw.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-ibmjcefw.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\ibmjcefw.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-ibmjgssprovider.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\ibmjgssprovider.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-ibmjsseprovider2.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\ibmjsseprovider2.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-ibmcertpathprovider.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\ibmcertpathprovider.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-xmldsigfw.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\xmldsigfw.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-xml.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\xml.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-resources.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\resources.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-access-bridge-64.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\ext\access-bridge-64.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-CmpCrmf.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\ext\CmpCrmf.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-dnsns.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\ext\dnsns.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-dtfj-interface.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\ext\dtfj-interface.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-dtfj.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\ext\dtfj.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-dtfjview.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\ext\dtfjview.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-gskikm.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\ext\gskikm.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-healthcenter.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\ext\healthcenter.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-ibmcac.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\ext\ibmcac.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-ibmcmsprovider.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\ext\ibmcmsprovider.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-ibmjcefips.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\ext\ibmjcefips.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-ibmjceprovider.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\ext\ibmjceprovider.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-ibmkeycert.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\ext\ibmkeycert.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-ibmpkcs11impl.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\ext\ibmpkcs11impl.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-ibmsaslprovider.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\ext\ibmsaslprovider.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-IBMSecureRandom.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\ext\IBMSecureRandom.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-ibmspnego.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\ext\ibmspnego.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-ibmxmlcrypto.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\ext\ibmxmlcrypto.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-ibmxmlencprovider.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\ext\ibmxmlencprovider.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-iwsorbutil.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\ext\iwsorbutil.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-jaccess.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\ext\jaccess.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-JavaDiagnosticsCollector.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\ext\JavaDiagnosticsCollector.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-javascript.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\ext\javascript.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-JawBridge.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\ext\JawBridge.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-jdmpview.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\ext\jdmpview.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-localedata.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\ext\localedata.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-traceformat.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\ext\traceformat.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-xmlencfw.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\ext\xmlencfw.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-zipfs.jar"
+  location="C:\Program Files (x86)\IBM\WebSphere\AppServer\java\jre\lib\ext\zipfs.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-all-themes-1.0.8.jar"
+  location="C:\BoxMonitor\BoxMonitor\WebRoot\WEB-INF\lib\all-themes-1.0.8.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-bson-3.2.1.jar"
+  location="C:\BoxMonitor\BoxMonitor\WebRoot\WEB-INF\lib\bson-3.2.1.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-commons-lang-2.6.jar"
+  location="C:\BoxMonitor\BoxMonitor\WebRoot\WEB-INF\lib\commons-lang-2.6.jar" model-entity="FileSystemJar"/>
  <file-system NAME="lib-mail-1.4.7.jar"
-  location="C:\Projects\BoxMonitor\WebRoot\WEB-INF\lib\mail-1.4.7.jar" model-entity="FileSystemJar"/>
+  location="C:\BoxMonitor\BoxMonitor\WebRoot\WEB-INF\lib\mail-1.4.7.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-mongodb-driver-3.2.1.jar"
+  location="C:\BoxMonitor\BoxMonitor\WebRoot\WEB-INF\lib\mongodb-driver-3.2.1.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-mongodb-driver-core-3.2.1.jar"
+  location="C:\BoxMonitor\BoxMonitor\WebRoot\WEB-INF\lib\mongodb-driver-core-3.2.1.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-primefaces-5.2.jar"
+  location="C:\BoxMonitor\BoxMonitor\WebRoot\WEB-INF\lib\primefaces-5.2.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="src-1"
+  location="%workspace.home%/../../.apt_generated" model-entity="FileSystemFolder"/>
  <web SERVLET_VERSION="2.4" model-entity="JstWeb" model-path="/web.xml">
   <module URI="/WEB-INF/faces-config.xml" model-entity="WebJSFModule"
    model-path="/faces-config.xml" src="src" web-root="WEB-ROOT"/>
