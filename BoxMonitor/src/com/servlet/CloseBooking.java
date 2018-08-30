@@ -80,7 +80,8 @@ public class CloseBooking extends HttpServlet {
 				try {
 					EmailServiceImpl.getInstance().sendMail(props, nextUserInQueue.getEmail(), subject, body);
 				} catch (Exception e) {
-					throw new ApplicationException(MessagesEnum.EMAIL_SENDING_FAILED.getMessage(usersInQueue.get(0).getEmail()));
+					System.err.println(MessagesEnum.EMAIL_SENDING_FAILED.getMessage(usersInQueue.get(0).getEmail()));
+					//throw new ApplicationException(MessagesEnum.EMAIL_SENDING_FAILED.getMessage(usersInQueue.get(0).getEmail()));
 				}
 			}
 		} catch (ApplicationException e){
