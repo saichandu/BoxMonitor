@@ -22,15 +22,19 @@ public class MongoDBConnManager {
 		if (instance == null) {
 			synchronized (MongoDBConnManager.class) {
 				if (instance == null) {
-					instance = new MongoDBConnManager();
-					final Properties props = PropertiesUtil.getInstance()
-							.getProps();
-					mongoClient = new MongoClient(
-							props.getProperty(ApplicationConstants.MONGO_DB_HOST),
-							Integer.parseInt(props
-									.getProperty(ApplicationConstants.MONGO_DB_PORT)));
-					DEFAULT_SCHEMA = props
-							.getProperty(ApplicationConstants.DEFAULT_SCHEMA);
+					try {
+						instance = new MongoDBConnManager();
+						final Properties props = PropertiesUtil.getInstance()
+								.getProps();
+						mongoClient = new MongoClient(
+								props.getProperty(ApplicationConstants.MONGO_DB_HOST),
+								Integer.parseInt(props
+										.getProperty(ApplicationConstants.MONGO_DB_PORT)));
+						DEFAULT_SCHEMA = props
+								.getProperty(ApplicationConstants.DEFAULT_SCHEMA);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
 			}
 		}

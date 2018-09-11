@@ -33,8 +33,8 @@ public class PropertiesUtil {
 		InputStream ipStream = null;
 		try {
 			props = new Properties();
-			ipStream = PropertiesUtil.class
-					.getResourceAsStream("../resources/Application.properties");
+			ipStream = PropertiesUtil.class.getClassLoader()
+					.getResourceAsStream("Application.properties");
 			props.load(ipStream);
 			
 			gmailprops = new Properties();
