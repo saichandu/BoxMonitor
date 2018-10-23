@@ -1,7 +1,10 @@
 <root>
   <facet id="jst.jsf">
     <node name="libprov">
-      <attribute name="provider-id" value="jsf-user-library-provider"/>
+      <attribute name="provider-id" value="runtime-library-provider"/>
     </node>
   </facet>
+  <facet id="wst.jsdt.web"/>
+  <facet id="jst.web"/>
+  <facet id="java"/>
 </root>
