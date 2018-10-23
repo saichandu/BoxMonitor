@@ -179,7 +179,7 @@ public class BoxBooking extends BaseMBean {
 			super.addInfoMessage(MessagesEnum.BOOKING_SUCCESS.getMessage(
 					bookingInfo.get(DBConstants.BOX_NAME)));
 			
-			final Properties props = PropertiesUtil.getInstance().getGmailProps();
+			final Properties props = PropertiesUtil.getInstance().getDmailProps();
 			
 			final ExternalContext ctxt = FacesContext.getCurrentInstance().getExternalContext();
 			final String subject = MessagesEnum.BOOKING_EMAIL_SUBJECT_TEMPLATE.getMessage(boxselected);
@@ -195,7 +195,7 @@ public class BoxBooking extends BaseMBean {
 										ApplicationConstants.ADMIN_EMAIL);
 			
 			try {
-				EmailServiceImpl.getInstance().sendGMail(props, email, subject, body);
+				EmailServiceImpl.getInstance().sendMail(props, email, subject, body);
 			} catch (Exception e) {
 				throw new ApplicationException(MessagesEnum.EMAIL_SENDING_FAILED.getMessage(email));
 			}

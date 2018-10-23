@@ -80,9 +80,9 @@ public class PassBooking extends HttpServlet {
 													request.getContextPath().length()),
 											boxName, nextUserInQueue.getBookingId(), ApplicationConstants.ADMIN_EMAIL);
 				
-				final Properties props = PropertiesUtil.getInstance().getGmailProps();
+				final Properties props = PropertiesUtil.getInstance().getDmailProps();
 				try {
-					EmailServiceImpl.getInstance().sendGMail(props, nextUserInQueue.getEmail(), subject, body);
+					EmailServiceImpl.getInstance().sendMail(props, nextUserInQueue.getEmail(), subject, body);
 				} catch (Exception e) {
 					throw new ApplicationException(MessagesEnum.EMAIL_SENDING_FAILED.getMessage(usersInQueue.get(0).getEmail()));
 				}

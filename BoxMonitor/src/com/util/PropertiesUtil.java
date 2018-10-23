@@ -49,12 +49,13 @@ public class PropertiesUtil {
 			gmailprops.put("mail.smtp.user", props.getProperty("GMAIL_USER"));
 			gmailprops.put("mail.smtp.password", props.getProperty("GMAIL_PWD"));
 			
-			/*dmailprops = new Properties();
-			dmailprops.put("mail.transport.protocol", "smtp");
-			dmailprops.put("mail.host", props.getProperty("OFFICEMAIL_HOST"));
-			dmailprops.put("mail.smtp.port", props.getProperty("OFFICEMAIL_PORT"));
-			dmailprops.put("mail.smtp.user", props.getProperty("OFFICEMAIL_USER"));*/
+			dmailprops = new Properties();
+			dmailprops.setProperty("mail.transport.protocol", "smtp");
+			dmailprops.setProperty("mail.host", props.getProperty("mail.host"));
+			dmailprops.setProperty("mail.smtp.port", props.getProperty("mail.smtp.port"));
+			dmailprops.setProperty("mail.smtp.user", props.getProperty("mail.fromMail"));
 		} catch (IOException e) {
+			e.printStackTrace();
 			throw new ApplicationException(MessagesEnum.APP_PROPERTIES_LOADING_FAILED.getMessage(), e);
 		} finally {
 			try {

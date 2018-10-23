@@ -69,6 +69,7 @@ public class TimeKeeper extends TimerTask {
 											.getMessage("Close Booking"));
 						}
 					} catch (IOException ex) {
+						ex.printStackTrace();
 						throw new ApplicationException(
 								MessagesEnum.FAILED_TO_INVOKE_SERVICE
 										.getMessage("Close Booking"),
@@ -77,6 +78,7 @@ public class TimeKeeper extends TimerTask {
 				}
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new ApplicationException(
 					MessagesEnum.CLOSE_BOOKING_FAILED.getMessage(bookingId), e);
 		}

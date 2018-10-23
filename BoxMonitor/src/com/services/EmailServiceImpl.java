@@ -31,19 +31,24 @@ public class EmailServiceImpl implements EmailService {
 	@Override
 	public void sendMail(final Properties props, final String receipents,
 			final String subject, final String body) throws Exception {
-		Session session = Session.getDefaultInstance(props, null);
-		MimeMessage message = new MimeMessage(session);
-		message.setFrom(new InternetAddress(props.getProperty("mail.smtp.user")));
-		InternetAddress[] address = InternetAddress.parse(receipents);
-		message.setRecipients(Message.RecipientType.TO, address);
-		message.setContent(body, "text/html");
-		message.setSubject(subject);
-		message.setSentDate(new Date());
-		//message.setText(body);
-		Transport transport = session.getTransport();
-		transport.connect();
-		transport.sendMessage(message, message.getRecipients(Message.RecipientType.TO));
-		transport.close();
+		try {
+			Session session = Session.getDefaultInstance(props, null);
+			MimeMessage message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(props.getProperty("mail.smtp.user")));
+			InternetAddress[] address = InternetAddress.parse(receipents);
+			message.setRecipients(Message.RecipientType.TO, address);
+			message.setContent(body, "text/html");
+			message.setSubject(subject);
+			message.setSentDate(new Date());
+			//message.setText(body);
+			Transport transport = session.getTransport();
+			transport.connect();
+			transport.sendMessage(message, message.getRecipients(Message.RecipientType.TO));
+			transport.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 	
 	@Override
