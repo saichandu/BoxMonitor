@@ -76,9 +76,9 @@ public class CloseBooking extends HttpServlet {
 													request.getContextPath().length()),
 											boxName, nextUserInQueue.getBookingId(), ApplicationConstants.ADMIN_EMAIL);
 				
-				final Properties props = PropertiesUtil.getInstance().getDmailProps();
+				final Properties props = PropertiesUtil.getInstance().getGmailProps();
 				try {
-					EmailServiceImpl.getInstance().sendMail(props, nextUserInQueue.getEmail(), subject, body);
+					EmailServiceImpl.getInstance().sendGMail(props, nextUserInQueue.getEmail(), subject, body);
 				} catch (Exception e) {
 					System.err.println(MessagesEnum.EMAIL_SENDING_FAILED.getMessage(usersInQueue.get(0).getEmail()));
 					//throw new ApplicationException(MessagesEnum.EMAIL_SENDING_FAILED.getMessage(usersInQueue.get(0).getEmail()));
